@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin - Jadwal Kajian | Masjid Raya Bintaro Jaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>tailwind.config={theme:{extend:{colors:{"primary":"#00342b","on-primary":"#ffffff","primary-container":"#004d40","surface":"#f8faf8","surface-container":"#eceeec","surface-container-lowest":"#ffffff","on-surface":"#191c1b","on-surface-variant":"#3f4945","outline-variant":"#bfc9c4","error":"#ba1a1a","secondary-container":"#fed488"}}}}</script>
+<style>
+  body { font-family: 'Manrope', sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-surface min-h-screen">
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm">
+    <div class="flex flex-col items-center mb-6">
+      <img src="logomasjid.jpg" alt="Logo" class="h-16 w-16 object-contain rounded-full border border-gray-200 mb-3"/>
+      <h1 class="text-xl font-bold text-primary">Admin Panel</h1>
+      <p class="text-sm text-on-surface-variant">Masjid Raya Bintaro Jaya</p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div>
+        <label class="text-sm font-semibold text-on-surface block mb-1">Username</label>
+        <input id="login-user" type="text" placeholder="admin"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary"/>
+      </div>
+      <div>
+        <label class="text-sm font-semibold text-on-surface block mb-1">Password</label>
+        <input id="login-pass" type="password" placeholder="••••••••"
+          class="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:border-primary"/>
+      </div>
+      <p id="login-error" class="text-error text-xs hidden">Username atau password salah.</p>
+      <button onclick="doLogin()" class="w-full bg-primary text-white py-3 rounded-lg font-semibold text-sm hover:bg-primary-container transition-colors">
+        Masuk
+      </button>
+    </div>
+    <p class="text-center text-xs text-on-surface-variant mt-4">
+      <a href="kajian.html" class="hover:underline text-primary">← Kembali ke halaman kajian</a>
+    </p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="admin-panel" class="hidden">
+
+  <!-- Topbar -->
+  <nav class="bg-primary text-white px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-md">
+    <div class="flex items-center gap-3">
+      <img src="logomasjid.jpg" alt="Logo" class="h-9 w-9 object-contain rounded-full border border-white/30"/>
+      <div>
+        <p class="font-bold text-sm">Admin Panel</p>
+        <p class="text-white/60 text-xs">Jadwal Kajian Islam</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="kajian.html" target="_blank" class="text-white/70 hover:text-white text-sm flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+        <span class="hidden sm:inline">Lihat Halaman</span>
+      </a>
+      <button onclick="doLogout()" class="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg text-sm font-semibold transition-colors flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">logout</span>
+        <span class="hidden sm:inline">Keluar</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+        <p class="text-xs text-on-surface-variant mb-1">Total Kajian</p>
+        <p class="text-2xl font-bold text-primary" id="stat-total">0</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+        <p class="text-xs text-on-surface-variant mb-1">Kajian Hari Ini</p>
+        <p class="text-2xl font-bold text-emerald-600" id="stat-today">0</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+        <p class="text-xs text-on-surface-variant mb-1">Hari Aktif</p>
+        <p class="text-2xl font-bold text-blue-600" id="stat-days">0</p>
+      </div>
+      <div class="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+        <p class="text-xs text-on-surface-variant mb-1">Ustadz/Ustadzah</p>
+        <p class="text-2xl font-bold text-amber-600" id="stat-ustadz">0</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+      <!-- FORM TAMBAH/EDIT -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 sticky top-24">
+          <h2 class="font-bold text-on-surface text-lg mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">add_circle</span>
+            <span id="form-title">Tambah Kajian</span>
+          </h2>
+          <form id="kajian-form" class="flex flex-col gap-4" onsubmit="submitForm(event)">
+            <input type="hidden" id="edit-index" value="-1"/>
+            <div>
+              <label class="text-xs font-semibold text-on-surface-variant block mb-1">Nama Kajian *</label>
+              <input id="f-nama" type="text" required placeholder="Kajian Tafsir Al-Qur'an"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"/>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-on-surface-variant block mb-1">Ustadz/Ustadzah *</label>
+              <input id="f-ustadz" type="text" required placeholder="Ust. Nama Lengkap"
+                class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"/>
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-on-surface-variant block mb-1">Tanggal *</label>
+                <input id="f-tanggal" type="date" required
+                  class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
+                  oninput="autoHari(this.value)"/>
+                <p class="text-xs text-primary font-semibold mt-1" id="hari-otomatis"></p>
+                <input type="hidden" id="f-hari"/>
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-on-surface-variant block mb-1">Tema *</label>
+                <select id="f-tema" required class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white">
+                  <option value="">Pilih tema</option>
+                  <option value="Tafsir">Tafsir</option>
+                  <option value="Hadits">Hadits</option>
+                  <option value="Fiqh">Fiqh</option>
+                  <option value="Akidah">Akidah</option>
+                  <option value="Sirah">Sirah</option>
+                  <option value="Tahsin">Tahsin</option>
+                  <option value="Muslimah">Muslimah</option>
+                  <option value="Remaja">Remaja</option>
+                  <option value="Anak">Anak</option>
+                  <option value="Keluarga">Keluarga</option>
+                  <option value="Khutbah">Khutbah</option>
+                  <option value="Umum">Umum</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-on-surface-variant block mb-1">Waktu *</label>
+              <div class="flex gap-2 items-center flex-wrap">
+                <select id="f-waktu-bada" class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white flex-1 min-w-0" onchange="updateWaktu()">
+                  <option value="">Pilih waktu</option>
+                  <option value="Ba'da Subuh">Ba'da Subuh</option>
+                  <option value="Ba'da Dzuhur">Ba'da Dzuhur</option>
+                  <option value="Ba'da Ashar">Ba'da Ashar</option>
+                  <option value="Ba'da Maghrib">Ba'da Maghrib</option>
+                  <option value="Ba'da Isya">Ba'da Isya</option>
+                  <option value="Pukul">Pukul</option>
+                </select>
+                <input id="f-waktu-jam" type="time"
+                  class="border border-gray-200 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-primary w-24"
+                  onchange="updateWaktu()"/>
+                <span class="text-xs text-on-surface-variant font-semibold">s.d</span>
+                <!-- Jam selesai: bisa jam atau "Selesai" -->
+                <div class="flex items-center gap-1">
+                  <input id="f-waktu-selesai" type="time"
+                    class="border border-gray-200 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-primary w-24"
+                    onchange="onJamSelesaiChange()"/>
+                  <button type="button" id="btn-selesai" onclick="toggleSelesai()"
+                    class="px-2 py-2 rounded-lg border border-gray-200 text-xs font-semibold text-on-surface-variant hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+                    title="Klik untuk pakai 'Selesai'">Selesai</button>
+                </div>
+              </div>
+              <input type="hidden" id="f-waktu" required/>
+              <p class="text-xs text-primary font-semibold mt-1" id="waktu-preview"></p>
+            </div>
+            <div>
+              <label class="text-xs font-semibold text-on-surface-variant block mb-1">Tempat *</label>
+              <select id="f-tempat" required class="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white">
+                <option value="">Pilih ruangan</option>
+                <option value="Masjid Utama Lt. 1">Masjid Utama Lt. 1</option>
+                <option value="Masjid Utama Lt. 2">Masjid Utama Lt. 2</option>
+                <option value="Masjid Utama Lt. 3">Masjid Utama Lt. 3</option>
+                <option value="Aula Masjid Lt. 2">Aula Masjid Lt. 2</option>
+                <option value="Ruang Kelas Lt. 3">Ruang Kelas Lt. 3</option>
+                <option value="Ruang Serbaguna">Ruang Serbaguna</option>
+                <option value="Halaman Masjid">Halaman Masjid</option>
+              </select>
+            </div>
+            <!-- Upload Gambar -->
+            <div>
+              <label class="text-xs font-semibold text-on-surface-variant block mb-1">Gambar Kajian <span class="text-gray-400 font-normal">(opsional, maks. 2 MB)</span></label>
+              <div class="border-2 border-dashed border-gray-200 rounded-lg p-4 text-center cursor-pointer hover:border-primary transition-colors relative" onclick="document.getElementById('f-gambar').click()">
+                <input id="f-gambar" type="file" accept="image/*" class="hidden" onchange="previewGambar(this)"/>
+                <div id="gambar-placeholder">
+                  <span class="material-symbols-outlined text-3xl text-gray-300">add_photo_alternate</span>
+                  <p class="text-xs text-on-surface-variant mt-1">Klik untuk pilih gambar</p>
+                  <p class="text-xs text-gray-400">JPG, PNG, WebP — maks. 2 MB</p>
+                </div>
+                <div id="gambar-preview" class="hidden">
+                  <img id="gambar-img" src="" alt="Preview" class="max-h-40 mx-auto rounded-lg object-cover"/>
+                  <p class="text-xs text-primary mt-2 font-semibold" id="gambar-nama"></p>
+                </div>
+              </div>
+              <button type="button" id="hapus-gambar-btn" onclick="hapusGambar()" class="hidden mt-1 text-xs text-error hover:underline">Hapus gambar</button>
+
+              <!-- Position editor — muncul setelah upload -->
+              <div id="pos-editor" class="hidden mt-3 bg-surface-container rounded-xl p-3">
+                <p class="text-xs font-semibold text-on-surface-variant mb-2">Sesuaikan posisi gambar di kartu:</p>
+                <!-- Preview kartu mini -->
+                <div class="w-full h-32 rounded-lg overflow-hidden mb-3 border border-outline-variant relative bg-gray-100">
+                  <div id="pos-preview-bg" class="absolute inset-0 bg-cover" style="background-position: 50% 30%;"></div>
+                </div>
+                <!-- Slider X -->
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-symbols-outlined text-sm text-on-surface-variant">swap_horiz</span>
+                  <label class="text-xs text-on-surface-variant w-12">Kiri-Kanan</label>
+                  <input id="pos-x" type="range" min="0" max="100" value="50"
+                    class="flex-1 accent-primary" oninput="updatePos()"/>
+                  <span id="pos-x-val" class="text-xs text-primary font-semibold w-8 text-right">50%</span>
+                </div>
+                <!-- Slider Y -->
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="material-symbols-outlined text-sm text-on-surface-variant">swap_vert</span>
+                  <label class="text-xs text-on-surface-variant w-12">Atas-Bawah</label>
+                  <input id="pos-y" type="range" min="0" max="100" value="30"
+                    class="flex-1 accent-primary" oninput="updatePos()"/>
+                  <span id="pos-y-val" class="text-xs text-primary font-semibold w-8 text-right">30%</span>
+                </div>
+                <!-- Slider Zoom -->
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-sm text-on-surface-variant">zoom_in</span>
+                  <label class="text-xs text-on-surface-variant w-12">Zoom</label>
+                  <input id="pos-zoom" type="range" min="100" max="300" value="100"
+                    class="flex-1 accent-primary" oninput="updatePos()"/>
+                  <span id="pos-zoom-val" class="text-xs text-primary font-semibold w-8 text-right">1×</span>
+                </div>
+              </div>
+
+              <input type="hidden" id="f-gambar-data"/>
+              <input type="hidden" id="f-gambar-pos" value="50% 30%"/>
+              <input type="hidden" id="f-gambar-zoom" value="100"/>
+            </div>
+            <div class="flex gap-2 pt-1">
+              <button type="submit" class="flex-1 bg-primary text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-primary-container transition-colors flex items-center justify-center gap-1">
+                <span class="material-symbols-outlined text-base">save</span>
+                <span id="btn-submit-label">Simpan</span>
+              </button>
+              <button type="button" onclick="resetForm()" class="px-4 py-2.5 rounded-lg border border-gray-200 text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors">
+                Batal
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- DAFTAR KAJIAN -->
+      <div class="lg:col-span-3">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-bold text-on-surface text-lg flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">list</span>
+            Daftar Kajian
+          </h2>
+          <div class="flex gap-2">
+            <select id="filter-hari-admin" onchange="renderTable()" class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm bg-white focus:outline-none focus:border-primary">
+              <option value="semua">Semua Hari</option>
+              <option value="senin">Senin</option>
+              <option value="selasa">Selasa</option>
+              <option value="rabu">Rabu</option>
+              <option value="kamis">Kamis</option>
+              <option value="jumat">Jumat</option>
+              <option value="sabtu">Sabtu</option>
+              <option value="ahad">Ahad</option>
+            </select>
+          </div>
+        </div>
+        <div id="kajian-table" class="flex flex-col gap-3"></div>
+        <p id="empty-msg" class="hidden text-center text-on-surface-variant py-12 text-sm">Belum ada kajian. Tambahkan kajian baru.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== AUTH =====
+const ADMIN_USER = 'admin';
+const ADMIN_PASS = 'mrbj2024';
+
+function doLogin() {
+  const u = document.getElementById('login-user').value;
+  const p = document.getElementById('login-pass').value;
+  if (u === ADMIN_USER && p === ADMIN_PASS) {
+    sessionStorage.setItem('admin_logged', '1');
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('admin-panel').classList.remove('hidden');
+    init();
+  } else {
+    document.getElementById('login-error').classList.remove('hidden');
+  }
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  sessionStorage.removeItem('admin_logged');
+  document.getElementById('admin-panel').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+// Cek session
+if (sessionStorage.getItem('admin_logged') === '1') {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('admin-panel').classList.remove('hidden');
+}
+
+// ===== DATA =====
+const temaWarna = {
+  Tafsir:   {warna:'bg-emerald-50 border-emerald-300', badge:'bg-emerald-100 text-emerald-800'},
+  Hadits:   {warna:'bg-amber-50 border-amber-300',     badge:'bg-amber-100 text-amber-800'},
+  Fiqh:     {warna:'bg-blue-50 border-blue-300',       badge:'bg-blue-100 text-blue-800'},
+  Akidah:   {warna:'bg-purple-50 border-purple-300',   badge:'bg-purple-100 text-purple-800'},
+  Sirah:    {warna:'bg-orange-50 border-orange-300',   badge:'bg-orange-100 text-orange-800'},
+  Tahsin:   {warna:'bg-teal-50 border-teal-300',       badge:'bg-teal-100 text-teal-800'},
+  Muslimah: {warna:'bg-pink-50 border-pink-300',       badge:'bg-pink-100 text-pink-800'},
+  Remaja:   {warna:'bg-indigo-50 border-indigo-300',   badge:'bg-indigo-100 text-indigo-800'},
+  Anak:     {warna:'bg-yellow-50 border-yellow-300',   badge:'bg-yellow-100 text-yellow-800'},
+  Keluarga: {warna:'bg-rose-50 border-rose-300',       badge:'bg-rose-100 text-rose-800'},
+  Khutbah:  {warna:'bg-emerald-50 border-emerald-300', badge:'bg-emerald-100 text-emerald-800'},
+  Umum:     {warna:'bg-sky-50 border-sky-300',         badge:'bg-sky-100 text-sky-800'},
+};
+
+const hariLabel = {senin:'Senin',selasa:'Selasa',rabu:'Rabu',kamis:'Kamis',jumat:'Jumat',sabtu:'Sabtu',ahad:'Ahad'};
+const hariIni = ['ahad','senin','selasa','rabu','kamis','jumat','sabtu'][new Date().getDay()];
+
+function getKajian() {
+  try { return JSON.parse(localStorage.getItem('kajian_custom') || '[]'); } catch { return []; }
+}
+function saveKajian(data) {
+  localStorage.setItem('kajian_custom', JSON.stringify(data));
+}
+
+function init() {
+  renderTable();
+  updateStats();
+}
+
+function updateStats() {
+  const data = getKajian();
+  document.getElementById('stat-total').textContent = data.length;
+  document.getElementById('stat-today').textContent = data.filter(j => j.hari === hariIni).length;
+  document.getElementById('stat-days').textContent = new Set(data.map(j => j.hari)).size;
+  document.getElementById('stat-ustadz').textContent = new Set(data.map(j => j.ustadz)).size;
+}
+
+function renderTable() {
+  const data = getKajian();
+  const filter = document.getElementById('filter-hari-admin')?.value || 'semua';
+  const list = filter === 'semua' ? data : data.filter(j => j.hari === filter);
+  const container = document.getElementById('kajian-table');
+  const empty = document.getElementById('empty-msg');
+
+  if (list.length === 0) {
+    container.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+
+  container.innerHTML = list.map((j, idx) => {
+    const realIdx = data.indexOf(j);
+    const w = temaWarna[j.tema] || temaWarna['Umum'];
+    return `
+    <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-4 flex items-start justify-between gap-3">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1 flex-wrap">
+          <span class="px-2 py-0.5 rounded-full text-xs font-bold ${w.badge}">${j.tema}</span>
+          <span class="text-xs text-on-surface-variant font-semibold">${hariLabel[j.hari]}${j.hari===hariIni?' <span class="text-emerald-600">• Hari Ini</span>':''}</span>
+        </div>
+        <p class="font-bold text-on-surface text-sm truncate">${j.nama}</p>
+        <p class="text-xs text-on-surface-variant mt-0.5">${j.ustadz}</p>
+        <div class="flex flex-wrap gap-3 mt-1.5 text-xs text-on-surface-variant">
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">event</span>${j.tanggal ? new Date(j.tanggal+'T00:00:00').toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}) : hariLabel[j.hari]}</span>
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span>${j.waktu}</span>
+          <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span>${j.tempat}</span>
+        </div>
+      </div>
+      <div class="flex flex-col gap-1.5 flex-shrink-0">
+        <button onclick="editKajian(${realIdx})" class="p-2 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 transition-colors" title="Edit">
+          <span class="material-symbols-outlined text-base">edit</span>
+        </button>
+        <button onclick="hapusKajian(${realIdx})" class="p-2 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 transition-colors" title="Hapus">
+          <span class="material-symbols-outlined text-base">delete</span>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function previewGambar(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const maxMB = 2;
+  if (file.size > maxMB * 1024 * 1024) {
+    alert(`Ukuran gambar terlalu besar. Maksimal ${maxMB} MB.`);
+    input.value = '';
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    document.getElementById('f-gambar-data').value = e.target.result;
+    document.getElementById('gambar-img').src = e.target.result;
+    document.getElementById('gambar-nama').textContent = file.name + ' (' + (file.size/1024).toFixed(0) + ' KB)';
+    document.getElementById('gambar-placeholder').classList.add('hidden');
+    document.getElementById('gambar-preview').classList.remove('hidden');
+    document.getElementById('hapus-gambar-btn').classList.remove('hidden');
+    // Tampilkan position editor
+    document.getElementById('pos-editor').classList.remove('hidden');
+    document.getElementById('pos-preview-bg').style.backgroundImage = `url('${e.target.result}')`;
+    document.getElementById('pos-x').value = 50;
+    document.getElementById('pos-y').value = 30;
+    updatePos();
+  };
+  reader.readAsDataURL(file);
+}
+
+function updatePos() {
+  const x    = document.getElementById('pos-x').value;
+  const y    = document.getElementById('pos-y').value;
+  const zoom = document.getElementById('pos-zoom').value;
+  document.getElementById('pos-x-val').textContent    = x + '%';
+  document.getElementById('pos-y-val').textContent    = y + '%';
+  document.getElementById('pos-zoom-val').textContent = (zoom/100).toFixed(1) + '×';
+  const pos = `${x}% ${y}%`;
+  const bg  = document.getElementById('pos-preview-bg');
+  bg.style.backgroundPosition = pos;
+  bg.style.backgroundSize     = zoom === '100' ? 'cover' : `${zoom}%`;
+  document.getElementById('f-gambar-pos').value  = pos;
+  document.getElementById('f-gambar-zoom').value = zoom;
+}
+
+function hapusGambar() {
+  document.getElementById('f-gambar').value = '';
+  document.getElementById('f-gambar-data').value = '';
+  document.getElementById('f-gambar-pos').value = '50% 30%';
+  document.getElementById('f-gambar-zoom').value = '100';
+  document.getElementById('gambar-img').src = '';
+  document.getElementById('gambar-nama').textContent = '';
+  document.getElementById('gambar-placeholder').classList.remove('hidden');
+  document.getElementById('gambar-preview').classList.add('hidden');
+  document.getElementById('hapus-gambar-btn').classList.add('hidden');
+  document.getElementById('pos-editor').classList.add('hidden');
+}
+
+let pakaiSelesai = false; // true = pakai kata "Selesai", false = pakai jam
+
+function toggleSelesai() {
+  pakaiSelesai = !pakaiSelesai;
+  const btn = document.getElementById('btn-selesai');
+  const jamSelesai = document.getElementById('f-waktu-selesai');
+  if (pakaiSelesai) {
+    jamSelesai.value = '';
+    jamSelesai.disabled = true;
+    jamSelesai.classList.add('opacity-40');
+    btn.classList.add('bg-primary','text-white','border-primary');
+    btn.classList.remove('text-on-surface-variant');
+  } else {
+    jamSelesai.disabled = false;
+    jamSelesai.classList.remove('opacity-40');
+    btn.classList.remove('bg-primary','text-white','border-primary');
+    btn.classList.add('text-on-surface-variant');
+  }
+  updateWaktu();
+}
+
+function onJamSelesaiChange() {
+  if (document.getElementById('f-waktu-selesai').value) {
+    // Kalau isi jam, matikan mode "Selesai"
+    pakaiSelesai = false;
+    const btn = document.getElementById('btn-selesai');
+    btn.classList.remove('bg-primary','text-white','border-primary');
+    btn.classList.add('text-on-surface-variant');
+  }
+  updateWaktu();
+}
+
+function updateWaktu() {
+  const bada    = document.getElementById('f-waktu-bada').value;
+  const jam     = document.getElementById('f-waktu-jam').value;
+  const selesai = document.getElementById('f-waktu-selesai').value;
+  let mulai = '';
+  if (bada && jam) {
+    mulai = bada === 'Pukul' ? `Pukul ${jam}` : `${bada} | ${jam}`;
+  } else if (bada && !jam) {
+    mulai = bada === 'Pukul' ? '' : bada;
+  } else if (!bada && jam) {
+    mulai = `Pukul ${jam}`;
+  }
+  let akhir = '';
+  if (pakaiSelesai) akhir = 'Selesai';
+  else if (selesai) akhir = selesai;
+  const hasil = akhir ? `${mulai} s.d ${akhir}` : mulai;
+  document.getElementById('f-waktu').value = hasil;
+  document.getElementById('waktu-preview').textContent = hasil ? '🕐 ' + hasil : '';
+}
+
+function autoHari(val) {
+  if (!val) { document.getElementById('hari-otomatis').textContent = ''; document.getElementById('f-hari').value = ''; return; }
+  const hariArr = ['ahad','senin','selasa','rabu','kamis','jumat','sabtu'];
+  const hariLabelArr = ['Ahad','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  const d = new Date(val + 'T00:00:00');
+  const idx = d.getDay();
+  document.getElementById('f-hari').value = hariArr[idx];
+  document.getElementById('hari-otomatis').textContent = '📅 ' + hariLabelArr[idx];
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  const idx = parseInt(document.getElementById('edit-index').value);
+  const data = getKajian();
+  const item = {
+    nama:    document.getElementById('f-nama').value.trim(),
+    ustadz:  document.getElementById('f-ustadz').value.trim(),
+    tanggal: document.getElementById('f-tanggal').value,
+    hari:    document.getElementById('f-hari').value,
+    tema:    document.getElementById('f-tema').value,
+    waktu:   document.getElementById('f-waktu').value.trim(),
+    tempat:  document.getElementById('f-tempat').value.trim(),
+    gambar:    document.getElementById('f-gambar-data').value || '',
+    gambarPos: document.getElementById('f-gambar-pos').value || '50% 30%',
+    gambarZoom: document.getElementById('f-gambar-zoom').value || '100',
+  };
+  if (!item.hari) { alert('Pilih tanggal terlebih dahulu.'); return; }
+  if (idx >= 0) {
+    data[idx] = item;
+    showToast('Kajian berhasil diperbarui');
+  } else {
+    data.push(item);
+    showToast('Kajian berhasil ditambahkan');
+  }
+  saveKajian(data);
+  resetForm();
+  renderTable();
+  updateStats();
+}
+
+function editKajian(idx) {
+  const data = getKajian();
+  const j = data[idx];
+  document.getElementById('edit-index').value = idx;
+  document.getElementById('f-nama').value = j.nama;
+  document.getElementById('f-ustadz').value = j.ustadz;
+  document.getElementById('f-tanggal').value = j.tanggal || '';
+  autoHari(j.tanggal || '');
+  document.getElementById('f-tema').value = j.tema;
+  document.getElementById('f-waktu').value = j.waktu;
+  // Parse waktu ke dropdown + jam
+  const badaOptions = ["Ba'da Subuh","Ba'da Dzuhur","Ba'da Ashar","Ba'da Maghrib","Ba'da Isya"];
+  let badaVal = '', jamVal = '', selesaiVal = '';
+  // Pisahkan jam selesai dulu jika ada " s/d "
+  let waktuMulai = j.waktu;
+  if (j.waktu.includes(' s/d ')) {
+    const parts = j.waktu.split(' s/d ');
+    waktuMulai = parts[0].trim();
+    selesaiVal = parts[1].trim();
+  }
+  const matchBada = badaOptions.find(b => waktuMulai.startsWith(b));
+  if (matchBada) {
+    badaVal = matchBada;
+    const parts = waktuMulai.split(/[—|]/);
+    jamVal = parts[1] ? parts[1].trim() : '';
+  } else {
+    badaVal = 'Pukul';
+    jamVal = waktuMulai.replace('Pukul','').trim();
+  }
+  document.getElementById('f-waktu-bada').value = badaVal;
+  document.getElementById('f-waktu-jam').value = jamVal;
+  document.getElementById('f-waktu-selesai').value = selesaiVal;
+  document.getElementById('waktu-preview').textContent = j.waktu ? '🕐 ' + j.waktu : '';
+  document.getElementById('f-tempat').value = j.tempat;
+  // Gambar
+  if (j.gambar) {
+    document.getElementById('f-gambar-data').value = j.gambar;
+    document.getElementById('gambar-img').src = j.gambar;
+    document.getElementById('gambar-nama').textContent = 'Gambar tersimpan';
+    document.getElementById('gambar-placeholder').classList.add('hidden');
+    document.getElementById('gambar-preview').classList.remove('hidden');
+    document.getElementById('hapus-gambar-btn').classList.remove('hidden');
+    // Restore position editor
+    const pos  = j.gambarPos  || '50% 30%';
+    const zoom = j.gambarZoom || '100';
+    const parts = pos.split(' ');
+    document.getElementById('pos-x').value    = parseInt(parts[0]) || 50;
+    document.getElementById('pos-y').value    = parseInt(parts[1]) || 30;
+    document.getElementById('pos-zoom').value = zoom;
+    document.getElementById('f-gambar-pos').value  = pos;
+    document.getElementById('f-gambar-zoom').value = zoom;
+    document.getElementById('pos-preview-bg').style.backgroundImage    = `url('${j.gambar}')`;
+    document.getElementById('pos-preview-bg').style.backgroundPosition = pos;
+    document.getElementById('pos-preview-bg').style.backgroundSize     = zoom === '100' ? 'cover' : `${zoom}%`;
+    document.getElementById('pos-editor').classList.remove('hidden');
+    updatePos();
+  } else {
+    hapusGambar();
+  }
+  document.getElementById('form-title').textContent = 'Edit Kajian';
+  document.getElementById('btn-submit-label').textContent = 'Perbarui';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function hapusKajian(idx) {
+  if (!confirm('Hapus kajian ini?')) return;
+  const data = getKajian();
+  data.splice(idx, 1);
+  saveKajian(data);
+  renderTable();
+  updateStats();
+  showToast('Kajian dihapus');
+}
+
+function resetForm() {
+  document.getElementById('kajian-form').reset();
+  document.getElementById('edit-index').value = '-1';
+  document.getElementById('f-hari').value = '';
+  document.getElementById('hari-otomatis').textContent = '';
+  document.getElementById('f-waktu').value = '';
+  document.getElementById('f-waktu-selesai').value = '';
+  document.getElementById('f-gambar-pos').value = '50% 30%';
+  document.getElementById('f-gambar-zoom').value = '100';
+  document.getElementById('pos-editor').classList.add('hidden');
+  document.getElementById('f-waktu-selesai').classList.remove('opacity-40');
+  document.getElementById('btn-selesai').classList.remove('bg-primary','text-white','border-primary');
+  document.getElementById('btn-selesai').classList.add('text-on-surface-variant');
+  pakaiSelesai = false;
+  document.getElementById('waktu-preview').textContent = '';
+  document.getElementById('form-title').textContent = 'Tambah Kajian';
+  document.getElementById('btn-submit-label').textContent = 'Simpan';
+  hapusGambar();
+}
+
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg z-50 transition-all';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+if (sessionStorage.getItem('admin_logged') === '1') init();
+</script>
+</body>
+</html>

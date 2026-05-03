@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Layanan Ummat - Masjid Raya Bintaro Jaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Midtrans Snap (Sandbox) -->
+<script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="Mid-client-Ar9ktTjZDZ8ZuLsG"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8faf8",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#94d3c1",
+                        "on-primary-fixed": "#00201a",
+                        "surface-container-highest": "#e1e3e1",
+                        "surface-variant": "#e1e3e1",
+                        "primary": "#00342b",
+                        "on-secondary-container": "#785a1a",
+                        "tertiary": "#253028",
+                        "primary-container": "#004d40",
+                        "tertiary-container": "#3b463e",
+                        "on-surface-variant": "#3f4945",
+                        "tertiary-fixed-dim": "#bdcabe",
+                        "surface-container-high": "#e6e9e7",
+                        "on-primary-container": "#7ebdac",
+                        "secondary-container": "#fed488",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#d9e6da",
+                        "outline": "#707975",
+                        "secondary-fixed": "#ffdea5",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "surface-bright": "#f8faf8",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#94d3c1",
+                        "secondary": "#775a19",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "on-primary-fixed-variant": "#065043",
+                        "surface-tint": "#29695b",
+                        "primary-fixed": "#afefdd",
+                        "on-background": "#191c1b",
+                        "background": "#f8faf8",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#eff1ef",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceeec",
+                        "surface-container-low": "#f2f4f2",
+                        "on-tertiary-fixed": "#131e17",
+                        "on-surface": "#191c1b",
+                        "on-tertiary-container": "#a7b4a9",
+                        "inverse-surface": "#2e3130",
+                        "outline-variant": "#bfc9c4",
+                        "on-tertiary-fixed-variant": "#3e4a41",
+                        "on-secondary-fixed": "#261900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "title-sm": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased selection:bg-primary-container selection:text-on-primary-container flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<nav class="bg-white/90 dark:bg-emerald-950/90 backdrop-blur-md full-width top-0 z-50 border-b border-emerald-100 dark:border-emerald-800/50 shadow-sm dark:shadow-none sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<!-- Brand -->
+<div class="flex items-center gap-3">
+  <button id="hamburger" class="md:hidden text-emerald-900 p-1 rounded-lg hover:bg-emerald-50 transition-colors" onclick="toggleMenu()">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <img alt="Masjid Raya Bintaro Jaya Logo" class="h-10 w-10 object-contain rounded-full border border-surface-container-highest" src="logomasjid.jpg"/>
+  <span class="text-xl font-bold text-emerald-900 dark:text-emerald-50 tracking-tight font-display-lg hidden sm:block text-primary">Masjid Raya Bintaro Jaya</span>
+</div>
+<!-- Navigation Links -->
+<ul class="hidden md:flex items-center gap-8 font-manrope text-sm font-semibold tracking-wide">
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors font-title-sm text-on-surface-variant hover:text-primary py-2" href="home.html">Beranda</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors font-title-sm text-on-surface-variant hover:text-primary py-2" href="alqur'an.html">Al-Qur'an</a></li>
+<li><a class="text-emerald-700 dark:text-emerald-300 border-b-2 border-emerald-700 dark:border-emerald-300 pb-1 font-title-sm text-primary" href="service.html">Layanan</a></li>
+<li><a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors font-title-sm text-on-surface-variant hover:text-primary py-2" href="contack.html">Kontak</a></li>
+</ul>
+<!-- Trailing Action -->
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface p-2">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<a class="hidden sm:inline-flex bg-primary text-on-primary font-label-caps text-label-caps px-6 py-3 rounded-lg hover:bg-primary-container hover:text-on-primary-container transition-all hover:opacity-80 active:scale-95 duration-200 shadow-sm items-center gap-2" href="#">
+<span>Zakat Now</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;" class="bg-white border-b border-emerald-100 shadow-sm z-40">
+  <div class="flex flex-col px-6 py-4 gap-4 font-manrope text-sm font-semibold">
+    <a href="home.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Beranda</a>
+    <a href="alqur'an.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Al-Qur'an</a>
+    <a href="service.html" class="text-emerald-700 py-2 border-b border-gray-100">Layanan</a>
+    <a href="contack.html" class="text-slate-600 hover:text-emerald-800 py-2">Kontak</a>
+  </div>
+</div>
+<script>function toggleMenu(){var m=document.getElementById('mobile-menu');m.style.display=m.style.display==='none'?'block':'none';}</script>
+<!-- Main Content -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-section-gap flex flex-col items-center">
+<!-- Page Header -->
+<header class="w-full text-center max-w-3xl space-y-stack-sm mb-8">
+<h1 class="font-display-lg text-display-lg text-primary">Layanan Ummat</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Bergabunglah dalam program kebaikan bersama Masjid Raya Bintaro Jaya. Salurkan donasi, sedekah, dan qurban Anda dengan mudah dan transparan.</p>
+</header>
+<!-- Sedekah Shubuh Section (Bento Grid) -->
+<section class="w-full grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Autodebet Card -->
+<div class="lg:col-span-2 bg-surface-container-lowest rounded-xl border border-surface-variant overflow-hidden flex flex-col md:flex-row relative">
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0iIzAwMzQyYiIgZmlsbC1vcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')] opacity-50"></div>
+<div class="w-full md:w-2/5 h-48 md:h-auto relative">
+<img alt="Sedekah Shubuh" class="absolute inset-0 w-full h-full object-cover" src="layanan.png"/>
+<div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-surface-container-lowest to-transparent"></div>
+</div>
+<div class="p-6 md:p-8 flex-1 flex flex-col justify-center relative z-10 space-y-stack-md">
+<div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary-container text-on-secondary-container font-label-caps text-label-caps mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="wb_twilight" data-weight="fill" style="font-variation-settings: 'FILL' 1;">wb_twilight</span>
+                            Rutin Berkah
+                        </div>
+<h2 class="font-headline-md text-headline-md text-primary">Sedekah Shubuh</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Awali hari dengan kebaikan. Aktifkan autodebet untuk memastikan sedekah shubuh Anda tidak pernah terlewatkan.</p>
+</div>
+<form class="space-y-4">
+<div class="space-y-2">
+<label class="font-title-sm text-title-sm text-on-surface block">Pilih Nominal Harian</label>
+<div class="grid grid-cols-3 gap-3">
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="sedekah_amount" type="radio" value="10000"/>
+<div class="text-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest peer-checked:border-primary peer-checked:bg-primary-fixed/20 hover:border-primary/50 transition-colors">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Rp 10rb</span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input checked="" class="peer sr-only" name="sedekah_amount" type="radio" value="25000"/>
+<div class="text-center p-3 rounded-lg border border-primary bg-primary-fixed/20 peer-checked:border-primary peer-checked:bg-primary-fixed/20 hover:border-primary/50 transition-colors shadow-[0_0_0_1px_rgba(0,52,43,1)]">
+<span class="font-body-sm text-body-sm font-semibold text-primary">Rp 25rb</span>
+</div>
+</label>
+<label class="cursor-pointer relative">
+<input class="peer sr-only" name="sedekah_amount" type="radio" value="50000"/>
+<div class="text-center p-3 rounded-lg border border-outline-variant bg-surface-container-lowest peer-checked:border-primary peer-checked:bg-primary-fixed/20 hover:border-primary/50 transition-colors">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface">Rp 50rb</span>
+</div>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-surface-variant">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="autorenew">autorenew</span>
+</div>
+<div>
+<p class="font-title-sm text-title-sm text-on-surface text-sm">Autodebet Aktif</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Dipotong setiap pkl 04:30 WIB</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<button onclick="bukaModalSedekah()" class="w-full bg-primary text-on-primary font-title-sm text-title-sm py-3 px-4 rounded-lg hover:bg-primary-container transition-colors flex items-center justify-center gap-2" type="button">
+<span>Mulai Sedekah Shubuh</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</form>
+</div>
+</div>
+<!-- Transparency Report Sidebar -->
+<div class="bg-surface-container-low rounded-xl border border-surface-variant p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-6 pb-4 border-b border-surface-variant">
+<h3 class="font-title-sm text-title-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="insights">insights</span>
+                        Laporan Transparansi
+                    </h3>
+<span class="font-label-caps text-label-caps text-on-surface-variant">HARI INI</span>
+</div>
+<div class="space-y-6 flex-grow">
+<!-- Stat 1 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-primary-fixed/20 to-transparent transform translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Total Terkumpul Hari Ini</p>
+<p class="font-headline-md text-headline-md text-primary">Rp 4.520.000</p>
+<div class="mt-2 text-xs font-label-caps text-label-caps text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+                            +12% dari kemarin
+                        </div>
+</div>
+<!-- Stat 2 -->
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant/30">
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-1">Penyaluran (Jum'at Berkah)</p>
+<p class="font-title-sm text-title-sm text-on-surface">350 Porsi Makanan</p>
+<div class="w-full bg-surface-variant rounded-full h-1.5 mt-3">
+<div class="bg-secondary-container h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Recent Donors (Anonymized) -->
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-3">MUZAKKI TERBARU</p>
+<ul class="space-y-3">
+<li class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center font-title-sm text-title-sm text-xs">H</div>
+<div class="flex-1">
+<p class="font-body-sm text-body-sm font-medium text-on-surface leading-tight">Hamba Allah</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">Baru saja</p>
+</div>
+<span class="font-title-sm text-title-sm text-primary text-sm">Rp 50rb</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center font-title-sm text-title-sm text-xs">R</div>
+<div class="flex-1">
+<p class="font-body-sm text-body-sm font-medium text-on-surface leading-tight">Bpk. Rizky***</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-xs">10 mnt lalu</p>
+</div>
+<span class="font-title-sm text-title-sm text-primary text-sm">Rp 100rb</span>
+</li>
+</ul>
+</div>
+</div>
+<a class="mt-6 text-center font-title-sm text-title-sm text-primary hover:text-primary-container transition-colors flex items-center justify-center gap-1" href="#">
+                    Lihat Laporan Lengkap
+                    <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Qurban 1445H (Horizontal Slider) -->
+<section class="w-full py-8">
+<div class="flex items-end justify-between mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+                        Program Qurban 1445H
+                        <span class="px-2 py-0.5 rounded text-xs bg-secondary text-on-secondary font-label-caps tracking-widest">SEGERA</span>
+</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Pilih hewan qurban terbaik untuk disalurkan ke wilayah pelosok.</p>
+</div>
+<div class="hidden sm:flex gap-2">
+<button class="w-10 h-10 rounded-full border border-outline-variant flex items-center justify-center text-on-surface hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-primary bg-primary-fixed/10 flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex overflow-x-auto pb-6 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 snap-x snap-mandatory hide-scrollbar">
+<!-- Qurban Sapi Card (Glassmorphism inspired) -->
+<div class="min-w-[300px] md:min-w-[380px] snap-center bg-surface-container-lowest rounded-xl border border-surface-variant p-1 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300">
+<div class="relative h-48 rounded-lg overflow-hidden mb-4">
+<img alt="Sapi Qurban" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Healthy premium brown cow standing in a green pasture with soft sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUNQwVfD_vOV6INebYFZdS1fby0L8hg0HEpiJzrBXwprspbPwcLEzcpk2J3_9qDYQ5tl3ZEYFDkdayIH23b_vV3EJDBXuOwg2nIZ_IJ3rPNnS_QW5RsWwlSEcMJ3-fQnwYDt4AzhI5FTPTvm8CYCta_pvWO_hsTu1aXl7a1BFedApc167kpgqB3k1v0lKpigNJpxkITMX3tfVTH3tDESLMcrvxkvRxU1atLMRtTgEThCQu08Zy86-dqbmkIdaHqzr6XWvt0tpUQ1M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<span class="bg-surface/90 backdrop-blur text-primary font-title-sm text-title-sm px-3 py-1 rounded-md text-sm">Sapi Bali Tipe A</span>
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-2 py-1 rounded text-xs font-bold">250-300 kg</span>
+</div>
+</div>
+<div class="px-4 pb-4">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-sm mb-1">Patungan (1/7)</p>
+<p class="font-title-sm text-title-sm text-primary text-lg">Rp 3.500.000</p>
+</div>
+<div class="text-right">
+<p class="font-body-sm text-body-sm text-on-surface-variant text-sm mb-1">Satu Ekor</p>
+<p class="font-title-sm text-title-sm text-on-surface text-lg">Rp 24.500.000</p>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
+                            Pilih Qurban
+                        </button>
+</div>
+</div>
+<!-- Qurban Kambing Card -->
+<div class="min-w-[300px] md:min-w-[380px] snap-center bg-surface-container-lowest rounded-xl border border-surface-variant p-1 relative overflow-hidden group hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] transition-all duration-300">
+<div class="relative h-48 rounded-lg overflow-hidden mb-4">
+<img alt="Kambing Qurban" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Healthy white goat looking forward in a grassy field with warm natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDG7d8zRgBtD2VODzkXOSQ6d4oTZiDZZ-oRSTcRQZza2BV3hKsW_diPFTNJdKQn2JtyffRkjU2QoP2LOMX570VWQobOl57uPVeD-Vk1u6xmqSPtYK5f1nBQuuPptT7zn_bvDDYSEqN7A-DanK2DAHyJePkR20EpHVfhsoW51Fopir6Shs5rUCLzWGqdSzq76fXJSYlJWTnKluZD-i0Jd9f99xqOZQrXdyUEX0XeviJyQ4gQWw4hPJsFWRtTERwrd5i6JWc4niGin6M"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
+<span class="bg-surface/90 backdrop-blur text-primary font-title-sm text-title-sm px-3 py-1 rounded-md text-sm">Kambing Super</span>
+<span class="bg-secondary-container text-on-secondary-container font-label-caps text-label-caps px-2 py-1 rounded text-xs font-bold">25-30 kg</span>
+</div>
+</div>
+<div class="px-4 pb-4">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-sm mb-1">Satu Ekor</p>
+<p class="font-title-sm text-title-sm text-primary text-lg">Rp 3.250.000</p>
+</div>
+<div class="text-right">
+<span class="inline-block mt-2 font-body-sm text-body-sm text-on-surface-variant text-xs bg-surface-container px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="local_shipping">local_shipping</span>
+                                    Gratis Penyaluran
+                                </span>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
+                            Pilih Qurban
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Program Berbagi Makanan (Grid) -->
+<section class="w-full">
+<header class="mb-6 text-center">
+<h2 class="font-headline-md text-headline-md text-primary">Program Berbagi</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl mx-auto">Salurkan kepedulian Anda dalam bentuk paket makanan bergizi untuk jamaah dan masyarakat sekitar.</p>
+</header>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Jum'at Berkah Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:border-primary-fixed-dim transition-colors">
+<div class="w-24 h-24 rounded-full bg-primary-fixed/20 flex items-center justify-center flex-shrink-0 text-primary">
+<span class="material-symbols-outlined text-4xl" data-icon="restaurant">restaurant</span>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<h3 class="font-title-sm text-title-sm text-on-surface mb-2">Jum'at Berkah</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Penyediaan makan siang gratis untuk jamaah shalat Jum'at dan warga dhuafa di sekitar Masjid.</p>
+<div class="flex flex-col sm:flex-row items-center gap-4 justify-between">
+<span class="font-title-sm text-title-sm text-primary">Rp 25.000 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">/porsi</span></span>
+<button onclick="bukaModalPorsi('Jum\'at Berkah','Penyediaan makan siang gratis untuk jamaah shalat Jum\'at dan warga dhuafa di sekitar Masjid.',25000,'Setiap Jumat')" class="px-5 py-2 rounded-lg bg-surface-container text-on-surface font-title-sm text-title-sm hover:bg-primary hover:text-on-primary transition-colors text-sm">
+                                Donasi Sekarang
+                            </button>
+</div>
+</div>
+</div>
+<!-- Ifthar Buka Puasa Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-variant p-6 flex flex-col sm:flex-row gap-6 items-center sm:items-start hover:border-primary-fixed-dim transition-colors">
+<div class="w-24 h-24 rounded-full bg-secondary-container/30 flex items-center justify-center flex-shrink-0 text-secondary">
+<span class="material-symbols-outlined text-4xl" data-icon="ramen_dining">ramen_dining</span>
+</div>
+<div class="flex-1 text-center sm:text-left">
+<div class="inline-block mb-1">
+<span class="bg-secondary-container/50 text-on-secondary-container font-label-caps text-label-caps px-2 py-0.5 rounded text-[10px]">SUNNAH SENIN KAMIS</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-on-surface mb-2">Ifthar Buka Puasa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Paket takjil dan makanan berat untuk jamaah yang berpuasa sunnah maupun wajib.</p>
+<div class="flex flex-col sm:flex-row items-center gap-4 justify-between">
+<span class="font-title-sm text-title-sm text-primary">Rp 35.000 <span class="font-body-sm text-body-sm text-on-surface-variant font-normal">/porsi</span></span>
+<button onclick="bukaModalPorsi('Ifthar Buka Puasa','Paket takjil dan makanan berat untuk jamaah yang berpuasa sunnah Senin-Kamis maupun wajib.',35000,'Senin & Kamis')" class="px-5 py-2 rounded-lg bg-surface-container text-on-surface font-title-sm text-title-sm hover:bg-primary hover:text-on-primary transition-colors text-sm">
+                                Donasi Sekarang
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Modal Donasi -->
+<div id="modal-donasi" style="display:none;" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 px-0 sm:px-4" onclick="if(event.target===this)tutupModalDonasi()">
+  <div class="bg-white w-full sm:max-w-md rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden">
+    <!-- Header -->
+    <div class="bg-primary text-white px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        <h2 class="font-bold text-base" id="modal-donasi-judul">Sedekah Shubuh</h2>
+      </div>
+      <button onclick="tutupModalDonasi()" class="p-1 rounded-full hover:bg-white/20 transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="px-6 py-5 flex flex-col gap-5 max-h-[80vh] overflow-y-auto">
+      <!-- Info program -->
+      <div class="bg-primary/5 rounded-xl p-4 flex items-start gap-3">
+        <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings:'FILL' 1;">info</span>
+        <p class="text-sm text-on-surface-variant" id="modal-donasi-desc"></p>
+      </div>
+
+      <!-- Jadwal otomatis -->
+      <div id="modal-jadwal-wrap">
+        <p class="text-sm font-bold text-on-surface mb-2">Atur Jadwal Donasi Otomatis</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="border border-outline-variant rounded-xl p-3">
+            <p class="text-xs text-on-surface-variant mb-1">Hari</p>
+            <p class="font-bold text-on-surface text-sm" id="modal-hari-donasi">Setiap Hari</p>
+          </div>
+          <div class="border border-outline-variant rounded-xl p-3">
+            <p class="text-xs text-on-surface-variant mb-1">Pukul</p>
+            <select id="modal-jam-donasi" class="font-bold text-on-surface text-sm w-full focus:outline-none bg-transparent">
+              <option>04:30 WIB</option>
+              <option>05:00 WIB</option>
+              <option>06:00 WIB</option>
+              <option>07:00 WIB</option>
+              <option>08:00 WIB</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nominal -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2" id="modal-input-label">Masukkan Nominal Donasi</p>
+        <!-- Pilihan cepat (diisi dinamis oleh JS) -->
+        <div class="grid grid-cols-3 gap-2 mb-3" id="modal-nominal-cepat">
+          <button type="button" onclick="pilihNominal(10000)" class="nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors">Rp 10.000</button>
+          <button type="button" onclick="pilihNominal(25000)" class="nominal-btn py-2 rounded-lg border-2 border-primary bg-primary/5 text-sm font-semibold text-primary transition-colors">Rp 25.000</button>
+          <button type="button" onclick="pilihNominal(50000)" class="nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors">Rp 50.000</button>
+          <button type="button" onclick="pilihNominal(100000)" class="nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors">Rp 100.000</button>
+          <button type="button" onclick="pilihNominal(250000)" class="nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors">Rp 250.000</button>
+          <button type="button" onclick="pilihNominal(500000)" class="nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors">Rp 500.000</button>
+        </div>
+        <!-- Input jumlah porsi (mode porsi) -->
+        <div id="input-porsi-wrap" class="hidden">
+          <div class="border-2 border-outline-variant rounded-xl p-4 focus-within:border-primary transition-colors">
+            <!-- Counter -->
+            <div class="flex items-center justify-center gap-4">
+              <button type="button" onclick="ubahPorsi(-1)"
+                class="w-11 h-11 rounded-full bg-surface-container hover:bg-primary hover:text-white font-bold text-2xl transition-colors flex items-center justify-center flex-shrink-0">−</button>
+              <div class="text-center">
+                <input id="modal-porsi-input" type="number" min="1" value="1"
+                  class="font-bold text-4xl text-on-surface focus:outline-none bg-transparent text-center w-32"
+                  oninput="setPorsiDariInput(this.value)"/>
+                <p class="text-xs text-on-surface-variant mt-0.5">porsi</p>
+              </div>
+              <button type="button" onclick="ubahPorsi(1)"
+                class="w-11 h-11 rounded-full bg-surface-container hover:bg-primary hover:text-white font-bold text-2xl transition-colors flex items-center justify-center flex-shrink-0">+</button>
+            </div>
+            <!-- Total -->
+            <div class="mt-3 pt-3 border-t border-outline-variant/30 text-center">
+              <span class="font-bold text-primary text-xl" id="total-porsi-display">Rp 0</span>
+            </div>
+          </div>
+        </div>
+        <!-- Input nominal (mode nominal) -->
+        <div id="input-nominal-wrap">
+          <div class="flex items-center border-2 border-outline-variant rounded-xl px-4 py-3 focus-within:border-primary transition-colors">
+            <span class="font-bold text-on-surface mr-2">Rp</span>
+            <input id="modal-nominal-input" type="number" min="1000" placeholder="0"
+              class="flex-1 font-bold text-2xl text-on-surface focus:outline-none bg-transparent"
+              oninput="syncNominal(this.value)"/>
+          </div>
+        </div>
+        <p class="text-xs text-on-surface-variant mt-1" id="modal-min-info">Min. donasi Rp 10.000</p>
+      </div>
+
+      <!-- Doa -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Tulis Doa <span class="font-normal text-on-surface-variant">(opsional)</span></p>
+        <textarea id="modal-doa" maxlength="240" rows="3" placeholder="Tulis doa agar bisa diamini bersama..."
+          class="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary resize-none transition-colors"
+          oninput="document.getElementById('doa-count').textContent=this.value.length"></textarea>
+        <p class="text-xs text-on-surface-variant text-right mt-1"><span id="doa-count">0</span>/240</p>
+      </div>
+
+      <!-- Metode pembayaran -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Metode Pembayaran</p>
+        <div class="border border-outline-variant rounded-xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">account_balance_wallet</span>
+            <div>
+              <p class="text-sm font-semibold text-on-surface">Transfer Bank / QRIS</p>
+              <p class="text-xs text-on-surface-variant">Konfirmasi via WhatsApp</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-primary">check_circle</span>
+        </div>
+      </div>
+
+      <!-- Tombol aktifkan -->
+      <button onclick="aktifkanDonasi()" class="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">favorite</span>
+        <span id="modal-btn-label">Aktifkan Donasi Otomatis</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let nominalTerpilih = 25000;
+let judulDonasi = '';
+let descDonasi = '';
+
+function bukaModalSedekah() {
+  judulDonasi = 'Sedekah Shubuh';
+  descDonasi = 'Awali hari dengan kebaikan. Donasi rutin setiap hari dipotong otomatis pukul 04:30 WIB.';
+  document.getElementById('modal-hari-donasi').textContent = 'Setiap Hari';
+  document.getElementById('modal-jadwal-wrap').style.display = 'block';
+  document.getElementById('modal-btn-label').textContent = 'Aktifkan Donasi Otomatis';
+  bukaModal();
+}
+
+function bukaModalDonasi(judul, desc, hari) {
+  judulDonasi = judul;
+  descDonasi = desc;
+  document.getElementById('modal-hari-donasi').textContent = hari || 'Setiap Minggu';
+  document.getElementById('modal-jadwal-wrap').style.display = hari ? 'block' : 'none';
+  document.getElementById('modal-btn-label').textContent = 'Donasi Sekarang';
+  bukaModal();
+}
+
+function bukaModalPorsi(judul, desc, hargaPerPorsi, hari) {
+  judulDonasi = judul;
+  descDonasi = desc;
+  window._hargaPerPorsi = hargaPerPorsi;
+  window._modePorsi = true;
+
+  document.getElementById('modal-donasi-judul').textContent = judul;
+  document.getElementById('modal-donasi-desc').textContent = desc;
+  document.getElementById('modal-jadwal-wrap').style.display = 'none';
+  document.getElementById('modal-btn-label').textContent = 'Donasi Sekarang';
+  document.getElementById('modal-input-label').textContent = 'Pilih Jumlah Porsi';
+
+  // Tampilkan info harga, sembunyikan tombol nominal
+  document.getElementById('modal-nominal-cepat').innerHTML = `
+    <div class="col-span-3 text-xs text-on-surface-variant">
+      Harga per porsi: <span class="font-bold text-primary">Rp ${hargaPerPorsi.toLocaleString('id-ID')}</span>
+    </div>`;
+
+  // Tampilkan input porsi, sembunyikan input nominal
+  document.getElementById('input-nominal-wrap').classList.add('hidden');
+  document.getElementById('input-porsi-wrap').classList.remove('hidden');
+
+  // Reset ke 1 porsi
+  document.getElementById('modal-porsi-input').value = 1;
+  setPorsiDariInput(1);
+
+  document.getElementById('modal-doa').value = '';
+  document.getElementById('doa-count').textContent = '0';
+  document.getElementById('modal-donasi').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function ubahPorsi(delta) {
+  const input = document.getElementById('modal-porsi-input');
+  const val = Math.max(1, (parseInt(input.value) || 1) + delta);
+  input.value = val;
+  setPorsiDariInput(val);
+}
+
+function setPorsiDariInput(val) {
+  const porsi = Math.max(1, parseInt(val) || 1);
+  window._porsiTerpilih = porsi;
+  nominalTerpilih = porsi * window._hargaPerPorsi;
+  document.getElementById('total-porsi-display').textContent = 'Rp ' + nominalTerpilih.toLocaleString('id-ID');
+  document.getElementById('modal-min-info').textContent =
+    `${porsi} porsi × Rp ${window._hargaPerPorsi.toLocaleString('id-ID')} = Rp ${nominalTerpilih.toLocaleString('id-ID')}`;
+}
+
+function pilihPorsi(porsi, harga) {
+  document.getElementById('modal-porsi-input').value = porsi;
+  setPorsiDariInput(porsi);
+}
+function bukaModal() {
+  document.getElementById('modal-donasi-judul').textContent = judulDonasi;
+  document.getElementById('modal-donasi-desc').textContent = descDonasi;
+  pilihNominal(25000);
+  document.getElementById('modal-doa').value = '';
+  document.getElementById('doa-count').textContent = '0';
+  document.getElementById('modal-donasi').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function tutupModalDonasi() {
+  document.getElementById('modal-donasi').style.display = 'none';
+  document.body.style.overflow = '';
+  window._modePorsi = false;
+  window._porsiTerpilih = 0;
+  // Reset ke mode nominal untuk sedekah shubuh
+  document.getElementById('input-nominal-wrap').classList.remove('hidden');
+  document.getElementById('input-porsi-wrap').classList.add('hidden');
+}
+
+function pilihNominal(val) {
+  nominalTerpilih = val;
+  document.getElementById('modal-nominal-input').value = val;
+  document.querySelectorAll('.nominal-btn').forEach(btn => {
+    const isActive = btn.textContent.replace(/\D/g,'') == val;
+    btn.className = isActive
+      ? 'nominal-btn py-2 rounded-lg border-2 border-primary bg-primary/5 text-sm font-semibold text-primary transition-colors'
+      : 'nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors';
+  });
+}
+
+function syncNominal(val) {
+  nominalTerpilih = parseInt(val) || 0;
+  document.querySelectorAll('.nominal-btn').forEach(btn => {
+    btn.className = 'nominal-btn py-2 rounded-lg border border-outline-variant text-sm font-semibold text-on-surface hover:border-primary hover:bg-primary/5 transition-colors';
+  });
+}
+
+function aktifkanDonasi() {
+  if (!nominalTerpilih || nominalTerpilih < 1000) {
+    alert('Masukkan jumlah yang valid');
+    return;
+  }
+  const jam = document.getElementById('modal-jam-donasi')?.value || '';
+  const doa = document.getElementById('modal-doa').value;
+  const btn = document.getElementById('modal-btn-label');
+  const btnEl = btn.closest('button');
+
+  // Loading state
+  btn.textContent = 'Memproses...';
+  btnEl.disabled = true;
+
+  const payload = {
+    program: judulDonasi,
+    nominal: nominalTerpilih,
+    porsi: window._modePorsi ? window._porsiTerpilih : null,
+    nama: '',
+    email: '',
+    doa: doa,
+  };
+
+  fetch('/.netlify/functions/create-transaction', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.error) throw new Error(data.error);
+    tutupModalDonasi();
+    // Buka Midtrans Snap popup
+    window.snap.pay(data.token, {
+      onSuccess: (result) => {
+        window.location.href = `/payment-success.html?order_id=${data.order_id}`;
+      },
+      onPending: (result) => {
+        alert('Pembayaran pending. Selesaikan pembayaran Anda.');
+      },
+      onError: (result) => {
+        alert('Pembayaran gagal. Silakan coba lagi.');
+      },
+      onClose: () => {
+        // User tutup popup tanpa bayar
+      }
+    });
+  })
+  .catch(err => {
+    alert('Terjadi kesalahan: ' + err.message);
+  })
+  .finally(() => {
+    btn.textContent = document.getElementById('modal-btn-label')?.dataset?.label || 'Donasi Sekarang';
+    btnEl.disabled = false;
+  });
+}
+</script>
+
+<!-- Footer -->
+<footer class="bg-emerald-900 text-white font-manrope text-xs font-light border-t border-emerald-800 mt-auto">
+  <div class="w-full py-10 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Brand -->
+      <span class="text-lg font-semibold text-emerald-50">Masjid Raya Bintaro Jaya</span>
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Privacy Policy</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Terms of Service</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Donation FAQ</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Contact Support</a>
+      </div>
+      <!-- Sosmed + Copyright -->
+      <div class="flex flex-col items-center md:items-end gap-3">
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/mrbjtangsel.official" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/628111055005" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://web.facebook.com/mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/c/MasjidRayaBintaroJayaTV" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+        <p class="text-emerald-100/70">© 2024 Masjid Raya Bintaro Jaya. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<style>
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</body></html>

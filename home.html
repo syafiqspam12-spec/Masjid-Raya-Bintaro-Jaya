@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Masjid Raya Bintaro Jaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f8faf8",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#94d3c1",
+                        "on-primary-fixed": "#00201a",
+                        "surface-container-highest": "#e1e3e1",
+                        "surface-variant": "#e1e3e1",
+                        "primary": "#00342b",
+                        "on-secondary-container": "#785a1a",
+                        "tertiary": "#253028",
+                        "primary-container": "#004d40",
+                        "tertiary-container": "#3b463e",
+                        "on-surface-variant": "#3f4945",
+                        "tertiary-fixed-dim": "#bdcabe",
+                        "surface-container-high": "#e6e9e7",
+                        "on-primary-container": "#7ebdac",
+                        "secondary-container": "#fed488",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d8dad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#d9e6da",
+                        "outline": "#707975",
+                        "secondary-fixed": "#ffdea5",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#e9c176",
+                        "surface-bright": "#f8faf8",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#94d3c1",
+                        "secondary": "#775a19",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "on-primary-fixed-variant": "#065043",
+                        "surface-tint": "#29695b",
+                        "primary-fixed": "#afefdd",
+                        "on-background": "#191c1b",
+                        "background": "#f8faf8",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#eff1ef",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceeec",
+                        "surface-container-low": "#f2f4f2",
+                        "on-tertiary-fixed": "#131e17",
+                        "on-surface": "#191c1b",
+                        "on-tertiary-container": "#a7b4a9",
+                        "inverse-surface": "#2e3130",
+                        "outline-variant": "#bfc9c4",
+                        "on-tertiary-fixed-variant": "#3e4a41",
+                        "on-secondary-fixed": "#261900"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "stack-lg": "32px",
+                        "container-margin": "20px",
+                        "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                        "title-sm": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Responsive font untuk mobile */
+        @media (max-width: 767px) {
+            .text-display-lg { font-size: 26px !important; line-height: 34px !important; }
+            .text-headline-md { font-size: 20px !important; line-height: 28px !important; }
+            .text-title-sm { font-size: 16px !important; }
+            .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
+            .py-section-gap { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar -->
+<nav class="bg-white/90 dark:bg-emerald-950/90 backdrop-blur-md font-manrope text-sm font-semibold tracking-wide docked full-width top-0 z-50 border-b border-emerald-100 dark:border-emerald-800/50 shadow-sm dark:shadow-none sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+  <button id="hamburger" class="md:hidden text-emerald-900 p-1 rounded-lg hover:bg-emerald-50 transition-colors" onclick="toggleMenu()">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <img src="logomasjid.jpg" alt="Logo Masjid Raya Bintaro Jaya" class="h-10 w-10 object-contain rounded-full border border-gray-200"/>
+  <div class="text-xl font-bold text-emerald-900 dark:text-emerald-50 tracking-tight">Masjid Raya Bintaro Jaya</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-emerald-700 dark:text-emerald-300 border-b-2 border-emerald-700 dark:border-emerald-300 pb-1" href="home.html">Beranda</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="alqur'an.html">Al-Qur'an</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="service.html">Layanan</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="contack.html">Kontak</a>
+</div>
+<div>
+<button class="bg-emerald-700 text-white px-6 py-2 rounded-lg hover:bg-emerald-800 transition-colors text-sm font-semibold">
+                    Zakat Now
+                </button>
+</div>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;" class="bg-white border-b border-emerald-100 shadow-sm z-40">
+  <div class="flex flex-col px-6 py-4 gap-4 font-manrope text-sm font-semibold">
+    <a href="home.html" class="text-emerald-700 py-2 border-b border-gray-100">Beranda</a>
+    <a href="alqur'an.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Al-Qur'an</a>
+    <a href="service.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Layanan</a>
+    <a href="contack.html" class="text-slate-600 hover:text-emerald-800 py-2">Kontak</a>
+  </div>
+</div>
+<script>function toggleMenu(){var m=document.getElementById('mobile-menu');m.style.display=m.style.display==='none'?'block':'none';}</script>
+<!-- Main Content Canvas -->
+<main class="max-w-7xl mx-auto px-6 py-section-gap space-y-section-gap">
+<!-- Hero & Next Prayer Section -->
+<section class="flex flex-col lg:flex-row gap-gutter">
+<!-- Hero Messaging -->
+<div class="flex-1 bg-surface-container-lowest rounded-xl p-8 lg:p-12 border border-surface-container border-opacity-50 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-fixed-dim/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+<div class="relative z-10 space-y-stack-md">
+<span class="inline-block px-3 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps rounded-full tracking-widest uppercase">
+                        Selamat Datang
+                    </span>
+<h1 class="font-display-lg text-display-lg text-primary max-w-lg">
+                        Temukan Ketenangan dalam Setiap Shalat
+                    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md leading-relaxed">
+                        Bergabunglah bersama komunitas kami dalam menumbuhkan spiritualitas, kepedulian, dan ilmu di jantung Bintaro.
+                    </p>
+<div class="pt-stack-sm">
+<button class="bg-primary text-on-primary font-title-sm text-title-sm px-8 py-4 rounded-lg hover:bg-primary-container transition-colors">
+                            Rencanakan Kunjungan
+                        </button>
+</div>
+</div>
+</div>
+<!-- Next Prayer Widget -->
+<div class="w-full lg:w-[400px] bg-primary text-on-primary rounded-xl p-8 flex flex-col justify-between relative overflow-hidden shadow-lg shadow-primary-container/20">
+<div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10 mix-blend-overlay"></div>
+<div class="relative z-10 flex justify-between items-start mb-stack-lg">
+<div>
+  <!-- Tanggal Masehi & Hijriah -->
+  <p class="text-primary-fixed/70 text-xs mb-1" id="prayer-date-masehi"></p>
+  <p class="text-secondary-container text-xs font-semibold mb-3" id="prayer-date-hijri"></p>
+  <h2 class="font-title-sm text-title-sm text-primary-fixed mb-1">Shalat Berikutnya</h2>
+  <div class="font-display-lg text-display-lg" id="next-prayer-name">--</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+  <span class="material-symbols-outlined text-4xl text-secondary-container" style="font-variation-settings: 'FILL' 1;">light_mode</span>
+  <!-- Jam digital -->
+  <span id="live-clock" class="text-secondary-container font-bold text-lg tracking-widest"></span>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-body-sm text-body-sm text-primary-fixed mb-2">Dimulai dalam</div>
+<div class="flex items-baseline gap-2 mb-stack-md">
+<span class="font-display-lg text-display-lg" id="next-prayer-h">--</span><span class="font-body-md text-body-md text-primary-fixed">j</span>
+<span class="font-display-lg text-display-lg" id="next-prayer-m">--</span><span class="font-body-md text-body-md text-primary-fixed">m</span>
+<span class="font-display-lg text-display-lg" id="next-prayer-s" style="font-size:28px">--</span><span class="font-body-md text-body-md text-primary-fixed">d</span>
+</div>
+<div class="flex items-center gap-2 font-body-sm text-body-sm text-primary-fixed-dim bg-white/10 px-3 py-2 rounded-lg">
+  <span class="material-symbols-outlined text-sm flex-shrink-0">location_on</span>
+  <span id="prayer-location" class="truncate max-w-[140px]">Mendeteksi lokasi...</span>
+  <button onclick="showKotaPicker()" title="Ganti kota" class="ml-1 hover:text-white transition-colors flex-shrink-0">
+    <span class="material-symbols-outlined text-sm">edit_location</span>
+  </button>
+  <button onclick="init()" title="Refresh lokasi otomatis" class="hover:text-white transition-colors flex-shrink-0">
+    <span class="material-symbols-outlined text-sm">my_location</span>
+  </button>
+</div>
+<!-- Tombol notifikasi adzan -->
+<button id="notif-btn" onclick="toggleNotification()"
+  class="mt-3 flex items-center gap-2 bg-white/10 hover:bg-white/20 transition-colors px-4 py-2 rounded-lg text-sm font-semibold text-primary-fixed-dim w-full justify-center">
+  <span class="material-symbols-outlined text-base" id="notif-icon">notifications_off</span>
+  <span id="notif-label">Aktifkan Notifikasi Adzan</span>
+</button>
+
+<!-- Modal pilih kota -->
+<div id="kota-modal" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+  <div class="bg-white rounded-2xl p-6 w-full max-w-sm shadow-xl">
+    <h3 class="font-bold text-on-surface text-lg mb-3">Pilih Kota</h3>
+    <input id="kota-search" type="text" placeholder="Ketik nama kota..." oninput="filterKota(this.value)"
+      class="w-full border border-outline-variant rounded-lg px-4 py-2 text-sm mb-3 focus:outline-none focus:border-primary"/>
+    <div id="kota-list" class="max-h-60 overflow-y-auto flex flex-col gap-1"></div>
+    <button onclick="document.getElementById('kota-modal').style.display='none'"
+      class="mt-4 w-full py-2 rounded-lg border border-outline-variant text-sm text-on-surface hover:bg-surface-container transition-colors">Batal</button>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7-Slot Prayer Schedule -->
+<section class="space-y-stack-md">
+<h3 class="font-headline-md text-headline-md text-primary">Jadwal Shalat Hari Ini</h3>
+<p id="prayer-load-msg" class="text-sm text-on-surface-variant">Memuat jadwal...</p>
+<div class="flex overflow-x-auto gap-4 pb-4 snap-x hide-scrollbar" id="prayer-schedule"></div>
+</section>
+<!-- Feature Banners (Bento Grid) -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Qurban Banner (Large) -->
+<div class="md:col-span-8 bg-surface-container-low rounded-xl overflow-hidden relative min-h-[300px] flex items-center">
+<div class="absolute inset-0 z-0">
+<img alt="Qurban banner background" class="w-full h-full object-cover opacity-40 mix-blend-luminosity" data-alt="close-up of brown cattle in a clean farm environment with soft daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvx_5w_cyZQizS3oKWVys9G6vUOmEjX2Po1Bz58A_E_wZOJrblyeWMi2V1Gt8ISd-qDMMwJEKbRPTQPb90DHGbopcYRGo8KDICKc2t-opZszu9JkFmJtnC29wjt6CGFjc1bgFnmXgEf6cE8k9tLMSvhxcqtNWOBTEWd3RWf71a2YQMWXWC9tKVJtnUAUes0X7YoC1G1DhkFilbl1I0jjtnb9yRgzhdx1V2xPD-MKKea4NlwUiYsvB_1440u4fVs7s7kmnHq024KoI"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-primary/80"></div>
+</div>
+<div class="relative z-10 p-8 lg:p-12 w-full flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="space-y-4 max-w-md">
+<span class="inline-block px-3 py-1 bg-secondary-container/20 text-secondary-fixed font-label-caps text-label-caps rounded-full uppercase tracking-widest border border-secondary-container/30">
+                            Program
+                        </span>
+<h3 class="font-display-lg text-display-lg text-on-primary">Qurban 1445H</h3>
+<p class="font-body-md text-body-md text-primary-fixed">Pastikan kurban Anda sampai kepada yang paling membutuhkan. Ikuti program Qurban kami yang terorganisir.</p>
+<button class="mt-4 bg-secondary-container text-on-secondary-container font-title-sm text-title-sm px-6 py-3 rounded-lg hover:bg-secondary-fixed transition-colors">
+                            Daftar Qurban
+                        </button>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-lg shrink-0 w-32 h-32 flex items-center justify-center">
+<img alt="Qurban 1445H Logo" class="max-w-full max-h-full" data-alt="minimalist modern vector logo for Qurban 1445H featuring sheep silhouette in emerald green" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbw6kiaisDMwCxRHNKiQ3DTwjOg1REOQ29v2c_us00wImnvzcVX2roPFse0v6R5g-7usjx-2v28bLWhyWvQS2zUdrFBLyK7TMAy_ASlX0cJtLhW1WAzVtGYDJHNVeaRkasFSwY3I2WaNnbVO9fIyHpwXjdiRXVDmA68OZradEBpV_8mL84dQLuCCMKeNb2rhlCAOuwzklQL4gVT_ppfOD920rydi_4EDYyk1160pPuPJ9iw8u78tKicFa4eWVCJ8_7GUK8dVdZS1I"/>
+</div>
+</div>
+</div>
+<!-- Sedekah Shubuh Banner (Smaller) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-container p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-fixed-dim transition-colors">
+<div>
+<div class="w-12 h-12 bg-surface-container-low rounded-full flex items-center justify-center mb-6 group-hover:bg-primary-fixed-dim/20 transition-colors">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="volunteer_activism">volunteer_activism</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-2">Sedekah Shubuh</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mulai hari dengan keberkahan. Otomatiskan sedekah subuh harian Anda dengan mudah.</p>
+</div>
+<div class="mt-8 flex items-center gap-2 text-primary font-title-sm text-title-sm">
+                    Atur auto-donasi 
+                    <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</section>
+<!-- Community Services Grid -->
+<section class="space-y-stack-md pt-8">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md text-headline-md text-primary">Layanan Komunitas</h3>
+<a class="font-title-sm text-title-sm text-primary-container hover:underline" href="service.html">Lihat semua</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<!-- Service Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-container hover:shadow-sm hover:-translate-y-1 transition-all cursor-pointer" onclick="location.href='kajian.html'">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="school">school</span>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-2">Kajian Islam</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Kelas mingguan mencakup Fiqh, Tafsir, dan Sirah untuk semua usia.</p>
+<p class="text-primary text-xs font-semibold mt-3 flex items-center gap-1">Lihat Jadwal <span class="material-symbols-outlined text-sm">arrow_forward</span></p>
+</div>
+<!-- Service Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-container hover:shadow-sm hover:-translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="family_home">family_home</span>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-2">Konseling Keluarga</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Bimbingan rahasia berdasarkan prinsip Islam untuk keharmonisan rumah tangga.</p>
+</div>
+<!-- Service Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-container hover:shadow-sm hover:-translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="restaurant">restaurant</span>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-2">Bank Makanan</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Distribusi bulanan sembako untuk keluarga yang membutuhkan.</p>
+</div>
+<!-- Service Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-surface-container hover:shadow-sm hover:-translate-y-1 transition-all">
+<span class="material-symbols-outlined text-primary text-3xl mb-4" data-icon="local_hospital">local_hospital</span>
+<h4 class="font-title-sm text-title-sm text-on-surface mb-2">Klinik Kesehatan</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Pemeriksaan kesehatan dasar gratis oleh dokter sukarela.</p>
+</div>
+</div>
+</section>
+</main>
+<script>
+const prayerNames = {
+  imsak:'Imsak', subuh:'Subuh', terbit:'Terbit',
+  dhuha:'Dhuha', dzuhur:'Dzuhur', ashar:'Ashar',
+  maghrib:'Maghrib', isya:'Isya'
+};
+const prayerKeys = ['imsak','subuh','terbit','dzuhur','ashar','maghrib','isya'];
+
+function timeToMinutes(t) {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function renderSchedule(jadwal, lokasi, tanggalMasehi, tanggalHijri) {
+  window._lastJadwal = jadwal; // simpan untuk notifikasi
+  document.getElementById('prayer-load-msg').style.display = 'none';
+  document.getElementById('prayer-location').textContent = lokasi;
+
+  // Isi tanggal
+  if (tanggalMasehi) document.getElementById('prayer-date-masehi').textContent = tanggalMasehi;
+  if (tanggalHijri) document.getElementById('prayer-date-hijri').textContent = tanggalHijri;
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const schedule = document.getElementById('prayer-schedule');
+  schedule.innerHTML = '';
+
+  // Cari shalat berikutnya (skip terbit & dhuha)
+  const mainKeys = ['subuh','dzuhur','ashar','maghrib','isya'];
+  let nextKey = null, nextTimestamp = null;
+  mainKeys.forEach(k => {
+    const [h, m] = jadwal[k].split(':').map(Number);
+    const t = new Date(); t.setHours(h, m, 0, 0);
+    if (t > new Date() && (!nextTimestamp || t < nextTimestamp)) {
+      nextTimestamp = t; nextKey = k;
+    }
+  });
+  if (!nextKey) {
+    // Lewat Isya — hitung Subuh besok
+    nextKey = 'subuh';
+    const [h, m] = jadwal.subuh.split(':').map(Number);
+    nextTimestamp = new Date(); nextTimestamp.setDate(nextTimestamp.getDate() + 1);
+    nextTimestamp.setHours(h, m, 0, 0);
+  }
+
+  document.getElementById('next-prayer-name').textContent = prayerNames[nextKey];
+
+  // Countdown real-time per detik
+  if (window._countdownTimer) clearInterval(window._countdownTimer);
+  window._countdownTimer = setInterval(() => {
+    const diff = Math.max(0, Math.floor((nextTimestamp - new Date()) / 1000));
+    const hh = String(Math.floor(diff / 3600)).padStart(2, '0');
+    const mm = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+    const ss = String(diff % 60).padStart(2, '0');
+    document.getElementById('next-prayer-h').textContent = hh;
+    document.getElementById('next-prayer-m').textContent = mm;
+    document.getElementById('next-prayer-s').textContent = ss;
+    if (diff === 0) clearInterval(window._countdownTimer);
+  }, 1000);
+
+  // Render kartu
+  prayerKeys.forEach(k => {
+    const t = jadwal[k]; if (!t) return;
+    const isNext = k === nextKey;
+    const card = document.createElement('div');
+    card.className = isNext
+      ? 'snap-start shrink-0 w-32 bg-surface-container-lowest border-2 border-secondary-container rounded-lg p-4 flex flex-col items-center justify-center gap-2 shadow-[0_0_15px_rgba(254,212,136,0.3)] relative'
+      : 'snap-start shrink-0 w-32 bg-surface-container-lowest border border-surface-container rounded-lg p-4 flex flex-col items-center justify-center gap-2';
+    card.innerHTML = isNext
+      ? `<div class="absolute -top-2 bg-secondary-container text-on-secondary-container font-label-caps text-[10px] px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Berikutnya</div>
+         <span class="font-body-sm text-body-sm text-primary">${prayerNames[k]}</span>
+         <span class="font-title-sm text-title-sm text-primary">${t}</span>`
+      : `<span class="font-body-sm text-body-sm text-on-surface-variant">${prayerNames[k]}</span>
+         <span class="font-title-sm text-title-sm text-on-surface">${t}</span>`;
+    schedule.appendChild(card);
+  });
+
+  // Jadwalkan notifikasi jika aktif
+  scheduleAdzanNotif();
+}
+
+async function loadByKotaId(kotaId, namaKota) {
+  const today = new Date();
+  const y = today.getFullYear(), mo = today.getMonth()+1, d = today.getDate();
+  const res = await fetch(`https://api.myquran.com/v2/sholat/jadwal/${kotaId}/${y}/${mo}/${d}`);
+  const json = await res.json();
+  if (json.status && json.data.jadwal) {
+    // Tanggal Masehi dari field tanggal API
+    const tanggalMasehi = json.data.jadwal.tanggal || '';
+
+    // Tanggal Hijriah dari API terpisah
+    let tanggalHijri = '';
+    try {
+      const hijriRes = await fetch(`https://api.myquran.com/v2/cal/hijr/${y}-${String(mo).padStart(2,'0')}-${String(d).padStart(2,'0')}`);
+      const hijriJson = await hijriRes.json();
+      if (hijriJson.status && hijriJson.data && hijriJson.data.date) {
+        tanggalHijri = hijriJson.data.date[1]; // contoh: "29 Syawal 1446 H"
+      }
+    } catch(e) {}
+
+    renderSchedule(json.data.jadwal, namaKota, tanggalMasehi, tanggalHijri);
+  } else throw new Error('Data tidak tersedia');
+}
+
+async function findKotaId(cityName) {
+  const res = await fetch('https://api.myquran.com/v2/sholat/kota/semua');
+  const json = await res.json();
+  const upper = cityName.toUpperCase().replace(/KABUPATEN|KOTA|KAB\./g,'').trim();
+  const words = upper.split(/[\s,]+/).filter(w => w.length > 2);
+
+  let bestMatch = null, bestScore = 0;
+  json.data.forEach(k => {
+    const lokasi = k.lokasi.replace(/KOTA|KAB\./g,'').trim();
+    let score = 0;
+    words.forEach(w => { if (lokasi.includes(w)) score += w.length; });
+    if (score > bestScore) { bestScore = score; bestMatch = k; }
+  });
+
+  // Minimal harus ada 1 kata cocok
+  return (bestScore > 0 ? bestMatch : null) || json.data.find(k => k.id === '1108');
+}
+
+let allKota = [];
+
+async function showKotaPicker() {
+  document.getElementById('kota-modal').style.display = 'flex';
+  if (allKota.length === 0) {
+    document.getElementById('kota-list').innerHTML = '<p class="text-sm text-center text-on-surface-variant py-4">Memuat daftar kota...</p>';
+    const res = await fetch('https://api.myquran.com/v2/sholat/kota/semua');
+    const json = await res.json();
+    allKota = json.data;
+  }
+  filterKota('');
+}
+
+function filterKota(q) {
+  const list = document.getElementById('kota-list');
+  const filtered = q.length < 2
+    ? allKota.slice(0, 30)
+    : allKota.filter(k => k.lokasi.includes(q.toUpperCase()));
+  list.innerHTML = filtered.map(k => `
+    <button onclick="pilihKota('${k.id}','${k.lokasi}')"
+      class="text-left px-3 py-2 rounded-lg text-sm text-on-surface hover:bg-surface-container transition-colors">
+      ${k.lokasi}
+    </button>`).join('');
+}
+
+function pilihKota(id, nama) {
+  document.getElementById('kota-modal').style.display = 'none';
+  localStorage.setItem('prayer_kota_id', id);
+  localStorage.setItem('prayer_kota_nama', nama);
+  loadByKotaId(id, nama);
+}
+
+async function init() {
+  // Cek kota yang sudah dipilih manual
+  const savedId = localStorage.getItem('prayer_kota_id');
+  const savedNama = localStorage.getItem('prayer_kota_nama');
+  if (savedId && savedNama) {
+    await loadByKotaId(savedId, savedNama);
+    return;
+  }
+  try {
+    if (!navigator.geolocation) throw new Error('no geo');
+    const pos = await new Promise((res, rej) =>
+      navigator.geolocation.getCurrentPosition(res, rej, {timeout:8000})
+    );
+    const {latitude: lat, longitude: lon} = pos.coords;
+    // Reverse geocode
+    const geo = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&accept-language=id&zoom=10`);
+    const geoData = await geo.json();
+    const addr = geoData.address;
+    // Prioritas: city > town > county > state_district > state
+    const city = addr.city || addr.town || addr.city_district || addr.county || addr.state_district || addr.state || 'Jakarta';
+    console.log('Lokasi terdeteksi:', city, addr);
+    const kota = await findKotaId(city);
+    await loadByKotaId(kota.id, kota.lokasi);
+  } catch(e) {
+    // Fallback Tangerang Selatan (lokasi masjid)
+    try { await loadByKotaId('1108', 'TANGERANG SELATAN'); }
+    catch { document.getElementById('prayer-load-msg').textContent = 'Gagal memuat jadwal.'; }
+  }
+}
+
+init();
+
+// ===== NOTIFIKASI ADZAN =====
+let swRegistration = null;
+let notifEnabled = localStorage.getItem('adzan_notif') === '1';
+
+function updateNotifBtn() {
+  const icon = document.getElementById('notif-icon');
+  const label = document.getElementById('notif-label');
+  if (!icon || !label) return;
+  if (notifEnabled) {
+    icon.textContent = 'notifications_active';
+    icon.style.color = '#fed488';
+    label.textContent = 'Notifikasi Adzan Aktif';
+  } else {
+    icon.textContent = 'notifications_off';
+    icon.style.color = '';
+    label.textContent = 'Aktifkan Notifikasi Adzan';
+  }
+}
+
+async function toggleNotification() {
+  if (!('Notification' in window)) {
+    alert('Browser Anda tidak mendukung notifikasi.');
+    return;
+  }
+  if (notifEnabled) {
+    notifEnabled = false;
+    localStorage.setItem('adzan_notif', '0');
+    updateNotifBtn();
+    return;
+  }
+  const perm = await Notification.requestPermission();
+  if (perm !== 'granted') {
+    alert('Izin notifikasi ditolak. Aktifkan di pengaturan browser.');
+    return;
+  }
+  notifEnabled = true;
+  localStorage.setItem('adzan_notif', '1');
+  updateNotifBtn();
+  scheduleAdzanNotif();
+}
+
+function scheduleAdzanNotif() {
+  if (!notifEnabled || !window._lastJadwal) return;
+  const jadwal = window._lastJadwal;
+  const mainKeys = ['subuh','dzuhur','ashar','maghrib','isya'];
+  const now = new Date();
+  const prayers = [];
+
+  mainKeys.forEach(k => {
+    const t = jadwal[k];
+    if (!t) return;
+    const [h, m] = t.split(':').map(Number);
+    const prayerTime = new Date();
+    prayerTime.setHours(h, m, 0, 0);
+    const delay = prayerTime - now;
+    if (delay > 0) {
+      prayers.push({ name: k.charAt(0).toUpperCase() + k.slice(1), time: t, delay });
+    }
+  });
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      swRegistration = reg;
+      reg.active?.postMessage({ type: 'SCHEDULE_ADZAN', prayers });
+      // Kirim ulang saat SW aktif
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        navigator.serviceWorker.controller?.postMessage({ type: 'SCHEDULE_ADZAN', prayers });
+      });
+    });
+  } else {
+    // Fallback: setTimeout biasa
+    prayers.forEach(({ name, time, delay }) => {
+      setTimeout(() => {
+        new Notification('🕌 Waktu ' + name, {
+          body: 'Sudah masuk waktu ' + name + ' — ' + time,
+          icon: 'logomasjid.jpg'
+        });
+      }, delay);
+    });
+  }
+}
+
+updateNotifBtn();
+
+// Jam digital real-time
+setInterval(() => {
+  const now = new Date();
+  const hh = String(now.getHours()).padStart(2,'0');
+  const mm = String(now.getMinutes()).padStart(2,'0');
+  const ss = String(now.getSeconds()).padStart(2,'0');
+  const el = document.getElementById('live-clock');
+  if (el) el.textContent = `${hh}:${mm}:${ss}`;
+}, 1000);
+</script>
+<!-- Footer -->
+<footer class="bg-emerald-900 text-white font-manrope text-xs font-light border-t border-emerald-800 mt-auto">
+  <div class="w-full py-10 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Brand -->
+      <span class="text-lg font-semibold text-emerald-50">Masjid Raya Bintaro Jaya</span>
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Privacy Policy</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Terms of Service</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Donation FAQ</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Contact Support</a>
+      </div>
+      <!-- Sosmed + Copyright -->
+      <div class="flex flex-col items-center md:items-end gap-3">
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/mrbjtangsel.official" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/628111055005" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://web.facebook.com/mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/c/MasjidRayaBintaroJayaTV" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+        <p class="text-emerald-100/70">© 2024 Masjid Raya Bintaro Jaya. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>

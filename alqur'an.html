@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Al-Qur'an - Masjid Raya Bintaro Jaya</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface": "#f8faf8",
+                            "on-secondary": "#ffffff",
+                            "primary-fixed-dim": "#94d3c1",
+                            "on-primary-fixed": "#00201a",
+                            "surface-container-highest": "#e1e3e1",
+                            "surface-variant": "#e1e3e1",
+                            "primary": "#00342b",
+                            "on-secondary-container": "#785a1a",
+                            "tertiary": "#253028",
+                            "primary-container": "#004d40",
+                            "tertiary-container": "#3b463e",
+                            "on-surface-variant": "#3f4945",
+                            "tertiary-fixed-dim": "#bdcabe",
+                            "surface-container-high": "#e6e9e7",
+                            "on-primary-container": "#7ebdac",
+                            "secondary-container": "#fed488",
+                            "error-container": "#ffdad6",
+                            "surface-dim": "#d8dad9",
+                            "on-primary": "#ffffff",
+                            "tertiary-fixed": "#d9e6da",
+                            "outline": "#707975",
+                            "secondary-fixed": "#ffdea5",
+                            "error": "#ba1a1a",
+                            "secondary-fixed-dim": "#e9c176",
+                            "surface-bright": "#f8faf8",
+                            "on-error": "#ffffff",
+                            "inverse-primary": "#94d3c1",
+                            "secondary": "#775a19",
+                            "on-secondary-fixed-variant": "#5d4201",
+                            "on-primary-fixed-variant": "#065043",
+                            "surface-tint": "#29695b",
+                            "primary-fixed": "#afefdd",
+                            "on-background": "#191c1b",
+                            "background": "#f8faf8",
+                            "on-tertiary": "#ffffff",
+                            "on-error-container": "#93000a",
+                            "inverse-on-surface": "#eff1ef",
+                            "surface-container-lowest": "#ffffff",
+                            "surface-container": "#eceeec",
+                            "surface-container-low": "#f2f4f2",
+                            "on-tertiary-fixed": "#131e17",
+                            "on-surface": "#191c1b",
+                            "on-tertiary-container": "#a7b4a9",
+                            "inverse-surface": "#2e3130",
+                            "outline-variant": "#bfc9c4",
+                            "on-tertiary-fixed-variant": "#3e4a41",
+                            "on-secondary-fixed": "#261900"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "unit": "8px",
+                            "gutter": "16px",
+                            "stack-sm": "8px",
+                            "stack-md": "16px",
+                            "stack-lg": "32px",
+                            "container-margin": "20px",
+                            "section-gap": "48px"
+                    },
+                    "fontFamily": {
+                            "title-sm": ["Manrope"],
+                            "body-sm": ["Manrope"],
+                            "label-caps": ["Inter"],
+                            "body-md": ["Manrope"],
+                            "headline-md": ["Manrope"],
+                            "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                            "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                            "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media (max-width: 767px) {
+            .text-display-lg { font-size: 26px !important; line-height: 34px !important; }
+            .text-headline-md { font-size: 20px !important; line-height: 28px !important; }
+            .text-title-sm { font-size: 16px !important; }
+            .px-6 { padding-left: 1rem !important; padding-right: 1rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-white/90 dark:bg-emerald-950/90 backdrop-blur-md sticky full-width top-0 z-50 border-b border-emerald-100 dark:border-emerald-800/50 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<!-- Hamburger (mobile kiri) + Brand -->
+<div class="flex items-center gap-3">
+  <button id="hamburger" class="md:hidden text-emerald-900 p-1 rounded-lg hover:bg-emerald-50 transition-colors" onclick="toggleMenu()">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+  <img src="logomasjid.jpg" alt="Logo Masjid Raya Bintaro Jaya" class="h-10 w-10 object-contain rounded-full border border-surface-container-highest"/>
+  <span class="text-xl font-bold text-emerald-900 dark:text-emerald-50 tracking-tight">Masjid Raya Bintaro Jaya</span>
+</div>
+<!-- Navigation Links -->
+<div class="hidden md:flex items-center gap-8 font-manrope text-sm font-semibold tracking-wide">
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="home.html">Beranda</a>
+<a class="text-emerald-700 dark:text-emerald-300 border-b-2 border-emerald-700 dark:border-emerald-300 pb-1" href="alqur'an.html">Al-Qur'an</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="service.html">Layanan</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors" href="contack.html">Kontak</a>
+</div>
+<!-- Trailing Action -->
+<button class="bg-emerald-900 text-white px-5 py-2.5 rounded-lg font-manrope text-sm font-semibold hover:bg-emerald-800 transition-colors">
+                Zakat Now
+            </button>
+</div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;" class="bg-white border-b border-emerald-100 shadow-sm z-40">
+  <div class="flex flex-col px-6 py-4 gap-4 font-manrope text-sm font-semibold">
+    <a href="home.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Beranda</a>
+    <a href="alqur'an.html" class="text-emerald-700 border-b border-gray-100 py-2">Al-Qur'an</a>
+    <a href="service.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Layanan</a>
+    <a href="contack.html" class="text-slate-600 hover:text-emerald-800 py-2">Kontak</a>
+  </div>
+</div>
+<script>function toggleMenu(){var m=document.getElementById('mobile-menu');m.style.display=m.style.display==='none'?'block':'none';}</script>
+<main class="flex-grow w-full max-w-7xl mx-auto px-container-margin py-section-gap">
+
+<!-- Widget Atas: Lanjutkan Membaca + Progress Khatam + Ayat Hari Ini -->
+<div id="top-widgets" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+  <!-- Lanjutkan Membaca -->
+  <div id="continue-card" class="bg-primary-container text-on-primary-container rounded-2xl p-6 shadow-sm relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/10 to-transparent rounded-bl-full pointer-events-none"></div>
+    <div class="flex items-center gap-2 mb-3">
+      <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+      <h2 class="font-label-caps text-label-caps uppercase tracking-wider text-secondary-container">Lanjutkan Membaca</h2>
+    </div>
+    <div id="continue-empty" class="text-on-primary-container/60 text-sm">Belum ada tanda baca tersimpan.</div>
+    <div id="continue-content" class="hidden flex flex-col gap-1"></div>
+  </div>
+  <!-- Progress Khatam -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm">
+    <h2 class="font-title-sm text-title-sm text-on-surface mb-4 flex items-center justify-between">
+      Progress Khatam Saya
+      <span class="material-symbols-outlined text-outline">timeline</span>
+    </h2>
+    <div class="flex flex-col gap-4">
+      <!-- Pilih acuan progress -->
+      <div id="khatam-picker-wrap">
+        <label class="font-body-sm text-body-sm text-on-surface-variant block mb-1">Acuan progress:</label>
+        <select id="khatam-picker" class="w-full border border-outline-variant rounded-lg px-3 py-2 text-sm text-on-surface bg-surface-container focus:outline-none focus:border-primary">
+          <option value="">-- Pilih tanda baca --</option>
+        </select>
+      </div>
+      <div class="flex items-end justify-between">
+        <div>
+          <p class="font-body-sm text-body-sm text-on-surface-variant" id="khatam-juz">Juz 0 / 30</p>
+          <p class="font-headline-md text-headline-md text-primary mt-1" id="khatam-pct">0%</p>
+          <p class="font-body-sm text-body-sm text-on-surface-variant text-xs mt-1" id="khatam-ayat-info">0 / 6.236 ayat</p>
+        </div>
+        <div class="text-right">
+          <p class="font-body-sm text-body-sm text-on-surface-variant">Target</p>
+          <p class="font-body-md text-body-md text-on-surface font-semibold mt-1">Ramadan 1446H</p>
+        </div>
+      </div>
+      <div class="w-full bg-surface-container h-3 rounded-full overflow-hidden">
+        <div class="bg-secondary-container h-full rounded-full transition-all" id="khatam-bar" style="width: 0%"></div>
+      </div>
+      <p class="font-body-sm text-body-sm text-on-surface-variant text-center mt-2">Membaca rutin membawa ketenangan hati.</p>
+    </div>
+  </div>
+  <!-- Ayat Hari Ini -->
+  <div class="bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 shadow-sm flex flex-col items-center justify-center text-center">
+    <h2 class="font-title-sm text-title-sm text-on-surface mb-4 flex items-center gap-2">
+      <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+      Ayat Hari Ini
+    </h2>
+    <p class="font-body-md text-body-md text-on-surface-variant italic mb-3" id="ayat-hari-ini-text">Memuat...</p>
+    <p class="font-body-sm text-body-sm text-primary font-semibold" id="ayat-hari-ini-ref"></p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 gap-8">
+<!-- Main Area (Surahs) -->
+<div class="flex flex-col gap-6">
+<!-- Page Header & Search -->
+<div class="flex flex-col gap-4">
+<h1 class="font-display-lg text-display-lg text-on-surface">Jelajahi Al-Qur'an</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Baca, pelajari, dan hayati Al-Qur'an Al-Karim. Telusuri surah atau cari kata kunci dan ayat tertentu.</p>
+<!-- Large Search Bar -->
+<div class="relative mt-2">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-xl py-4 pl-12 pr-4 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors shadow-sm" placeholder="Cari nama surah, arti, atau nomor..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 bg-surface-container hover:bg-surface-container-high text-on-surface px-3 py-1.5 rounded-lg font-label-caps text-label-caps transition-colors">Cari</button>
+</div>
+</div>
+<!-- Surah Grid (3 Columns) -->
+<div id="surah-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4"></div>
+<p id="no-result" class="hidden text-center text-on-surface-variant py-8">Surah tidak ditemukan.</p>
+</div>
+
+<script>
+const surahs = [
+  [1,"Al-Fatihah","Pembuka",7,"الفاتحة"],
+  [2,"Al-Baqarah","Sapi Betina",286,"البقرة"],
+  [3,"Ali 'Imran","Keluarga Imran",200,"آل عمران"],
+  [4,"An-Nisa","Wanita",176,"النساء"],
+  [5,"Al-Ma'idah","Hidangan",120,"المائدة"],
+  [6,"Al-An'am","Binatang Ternak",165,"الأنعام"],
+  [7,"Al-A'raf","Tempat Tertinggi",206,"الأعراف"],
+  [8,"Al-Anfal","Rampasan Perang",75,"الأنفال"],
+  [9,"At-Tawbah","Pengampunan",129,"التوبة"],
+  [10,"Yunus","Nabi Yunus",109,"يونس"],
+  [11,"Hud","Nabi Hud",123,"هود"],
+  [12,"Yusuf","Nabi Yusuf",111,"يوسف"],
+  [13,"Ar-Ra'd","Guruh",43,"الرعد"],
+  [14,"Ibrahim","Nabi Ibrahim",52,"إبراهيم"],
+  [15,"Al-Hijr","Daerah Al-Hijr",99,"الحجر"],
+  [16,"An-Nahl","Lebah",128,"النحل"],
+  [17,"Al-Isra","Perjalanan Malam",111,"الإسراء"],
+  [18,"Al-Kahf","Gua",110,"الكهف"],
+  [19,"Maryam","Maryam",98,"مريم"],
+  [20,"Ta-Ha","Ta Ha",135,"طه"],
+  [21,"Al-Anbiya","Para Nabi",112,"الأنبياء"],
+  [22,"Al-Hajj","Haji",78,"الحج"],
+  [23,"Al-Mu'minun","Orang-orang Beriman",118,"المؤمنون"],
+  [24,"An-Nur","Cahaya",64,"النور"],
+  [25,"Al-Furqan","Pembeda",77,"الفرقان"],
+  [26,"Ash-Shu'ara","Para Penyair",227,"الشعراء"],
+  [27,"An-Naml","Semut",93,"النمل"],
+  [28,"Al-Qasas","Cerita",88,"القصص"],
+  [29,"Al-'Ankabut","Laba-laba",69,"العنكبوت"],
+  [30,"Ar-Rum","Bangsa Romawi",60,"الروم"],
+  [31,"Luqman","Luqman",34,"لقمان"],
+  [32,"As-Sajdah","Sujud",30,"السجدة"],
+  [33,"Al-Ahzab","Golongan Bersekutu",73,"الأحزاب"],
+  [34,"Saba","Kaum Saba",54,"سبأ"],
+  [35,"Fatir","Pencipta",45,"فاطر"],
+  [36,"Ya-Sin","Ya Sin",83,"يس"],
+  [37,"As-Saffat","Yang Bershaf-shaf",182,"الصافات"],
+  [38,"Sad","Sad",88,"ص"],
+  [39,"Az-Zumar","Rombongan",75,"الزمر"],
+  [40,"Ghafir","Yang Maha Pengampun",85,"غافر"],
+  [41,"Fussilat","Yang Dijelaskan",54,"فصلت"],
+  [42,"Ash-Shura","Musyawarah",53,"الشورى"],
+  [43,"Az-Zukhruf","Perhiasan",89,"الزخرف"],
+  [44,"Ad-Dukhan","Kabut",59,"الدخان"],
+  [45,"Al-Jathiyah","Yang Berlutut",37,"الجاثية"],
+  [46,"Al-Ahqaf","Bukit Pasir",35,"الأحقاف"],
+  [47,"Muhammad","Nabi Muhammad",38,"محمد"],
+  [48,"Al-Fath","Kemenangan",29,"الفتح"],
+  [49,"Al-Hujurat","Kamar-kamar",18,"الحجرات"],
+  [50,"Qaf","Qaf",45,"ق"],
+  [51,"Adh-Dhariyat","Angin yang Menerbangkan",60,"الذاريات"],
+  [52,"At-Tur","Bukit Sinai",49,"الطور"],
+  [53,"An-Najm","Bintang",62,"النجم"],
+  [54,"Al-Qamar","Bulan",55,"القمر"],
+  [55,"Ar-Rahman","Yang Maha Pengasih",78,"الرحمن"],
+  [56,"Al-Waqi'ah","Hari Kiamat",96,"الواقعة"],
+  [57,"Al-Hadid","Besi",29,"الحديد"],
+  [58,"Al-Mujadila","Wanita yang Mengajukan Gugatan",22,"المجادلة"],
+  [59,"Al-Hashr","Pengusiran",24,"الحشر"],
+  [60,"Al-Mumtahanah","Wanita yang Diuji",13,"الممتحنة"],
+  [61,"As-Saf","Barisan",14,"الصف"],
+  [62,"Al-Jumu'ah","Hari Jumat",11,"الجمعة"],
+  [63,"Al-Munafiqun","Orang-orang Munafik",11,"المنافقون"],
+  [64,"At-Taghabun","Hari Dinampakkan Kesalahan",18,"التغابن"],
+  [65,"At-Talaq","Talak",12,"الطلاق"],
+  [66,"At-Tahrim","Mengharamkan",12,"التحريم"],
+  [67,"Al-Mulk","Kerajaan",30,"الملك"],
+  [68,"Al-Qalam","Pena",52,"القلم"],
+  [69,"Al-Haqqah","Hari Kiamat",52,"الحاقة"],
+  [70,"Al-Ma'arij","Tempat Naik",44,"المعارج"],
+  [71,"Nuh","Nabi Nuh",28,"نوح"],
+  [72,"Al-Jinn","Jin",28,"الجن"],
+  [73,"Al-Muzzammil","Orang Berselimut",20,"المزمل"],
+  [74,"Al-Muddaththir","Orang Berkemul",56,"المدثر"],
+  [75,"Al-Qiyamah","Hari Kiamat",40,"القيامة"],
+  [76,"Al-Insan","Manusia",31,"الإنسان"],
+  [77,"Al-Mursalat","Malaikat yang Diutus",50,"المرسلات"],
+  [78,"An-Naba","Berita Besar",40,"النبأ"],
+  [79,"An-Nazi'at","Malaikat yang Mencabut",46,"النازعات"],
+  [80,"'Abasa","Ia Bermuka Masam",42,"عبس"],
+  [81,"At-Takwir","Menggulung",29,"التكوير"],
+  [82,"Al-Infitar","Terbelah",19,"الانفطار"],
+  [83,"Al-Mutaffifin","Orang-orang yang Curang",36,"المطففين"],
+  [84,"Al-Inshiqaq","Terbelah",25,"الانشقاق"],
+  [85,"Al-Buruj","Gugusan Bintang",22,"البروج"],
+  [86,"At-Tariq","Yang Datang di Malam Hari",17,"الطارق"],
+  [87,"Al-A'la","Yang Paling Tinggi",19,"الأعلى"],
+  [88,"Al-Ghashiyah","Hari Pembalasan",26,"الغاشية"],
+  [89,"Al-Fajr","Fajar",30,"الفجر"],
+  [90,"Al-Balad","Negeri",20,"البلد"],
+  [91,"Ash-Shams","Matahari",15,"الشمس"],
+  [92,"Al-Layl","Malam",21,"الليل"],
+  [93,"Ad-Duhaa","Waktu Dhuha",11,"الضحى"],
+  [94,"Ash-Sharh","Kelapangan",8,"الشرح"],
+  [95,"At-Tin","Buah Tin",8,"التين"],
+  [96,"Al-'Alaq","Segumpal Darah",19,"العلق"],
+  [97,"Al-Qadr","Kemuliaan",5,"القدر"],
+  [98,"Al-Bayyinah","Bukti Nyata",8,"البينة"],
+  [99,"Az-Zalzalah","Kegoncangan",8,"الزلزلة"],
+  [100,"Al-'Adiyat","Kuda Perang",11,"العاديات"],
+  [101,"Al-Qari'ah","Hari Kiamat",11,"القارعة"],
+  [102,"At-Takathur","Bermegah-megahan",8,"التكاثر"],
+  [103,"Al-'Asr","Masa",3,"العصر"],
+  [104,"Al-Humazah","Pengumpat",9,"الهمزة"],
+  [105,"Al-Fil","Gajah",5,"الفيل"],
+  [106,"Quraysh","Suku Quraisy",4,"قريش"],
+  [107,"Al-Ma'un","Barang yang Berguna",7,"الماعون"],
+  [108,"Al-Kawthar","Nikmat yang Banyak",3,"الكوثر"],
+  [109,"Al-Kafirun","Orang-orang Kafir",6,"الكافرون"],
+  [110,"An-Nasr","Pertolongan",3,"النصر"],
+  [111,"Al-Masad","Sabut",5,"المسد"],
+  [112,"Al-Ikhlas","Ikhlas",4,"الإخلاص"],
+  [113,"Al-Falaq","Waktu Subuh",5,"الفلق"],
+  [114,"An-Nas","Manusia",6,"الناس"]
+];
+
+function renderSurahs(list) {
+  const grid = document.getElementById('surah-grid');
+  const noResult = document.getElementById('no-result');
+  grid.innerHTML = '';
+  if (list.length === 0) { noResult.classList.remove('hidden'); return; }
+  noResult.classList.add('hidden');
+  list.forEach(([num, name, meaning, ayahs, arabic]) => {
+    const url = `baca.html?surah=${num}`;
+    grid.innerHTML += `
+      <a class="group bg-surface-container-lowest border border-outline-variant rounded-xl p-5 hover:border-primary hover:shadow-md transition-all flex items-center justify-between" href="${url}">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-label-caps text-label-caps text-on-surface group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors text-sm font-bold">${num}</div>
+          <div>
+            <h3 class="font-title-sm text-title-sm text-on-surface">${name}</h3>
+            <p class="font-body-sm text-body-sm text-on-surface-variant">${meaning} • ${ayahs} Ayat</p>
+          </div>
+        </div>
+        <div class="text-xl font-bold text-primary" style="font-family: serif;">${arabic}</div>
+      </a>`;
+  });
+}
+
+renderSurahs(surahs);
+
+// Isi widget Lanjutkan Membaca dari localStorage
+// Isi widget Lanjutkan Membaca dari bookmark_slots
+function renderContinueWidget() {
+  const slots = (() => { try { return JSON.parse(localStorage.getItem('bookmark_slots') || '[]'); } catch { return []; } })();
+  const continueEmpty = document.getElementById('continue-empty');
+  const continueContent = document.getElementById('continue-content');
+
+  if (slots.length > 0) {
+    continueEmpty.classList.add('hidden');
+    continueContent.classList.remove('hidden');
+    continueContent.innerHTML = slots.slice().reverse().map((s, i) => `
+      <div class="flex items-center gap-2 mb-2 last:mb-0">
+        <a href="baca.html?surah=${s.surah}&ayat=${s.ayat}"
+           class="flex-1 flex items-center justify-between gap-3 bg-secondary-container/20 hover:bg-secondary-container/40 rounded-xl px-4 py-3 transition-colors">
+          <div>
+            <p class="font-title-sm text-sm font-bold">${s.nama}</p>
+            <p class="text-on-primary-container/70 text-xs">Ayat ${s.ayat}</p>
+          </div>
+          <span class="material-symbols-outlined text-secondary-container text-base">arrow_forward</span>
+        </a>
+        <button onclick="removeSlot(${s.surah}, ${s.ayat})"
+          class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-error/80 hover:text-white text-on-primary-container/60 transition-colors flex-shrink-0"
+          title="Hapus tanda ini">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </div>`).join('');
+  } else {
+    continueEmpty.classList.remove('hidden');
+    continueContent.classList.add('hidden');
+  }
+}
+
+function removeSlot(surah, ayat) {
+  if (!confirm(`Hapus tanda bacaan ini?`)) return;
+  let slots = (() => { try { return JSON.parse(localStorage.getItem('bookmark_slots') || '[]'); } catch { return []; } })();
+  slots = slots.filter(s => !(s.surah == surah && s.ayat == ayat));
+  localStorage.setItem('bookmark_slots', JSON.stringify(slots));
+  localStorage.removeItem(`bookmark_${surah}_${ayat}`);
+  // Hapus acuan khatam jika slot ini yang dipilih
+  const acuan = localStorage.getItem('khatam_acuan');
+  if (acuan === `${surah}_${ayat}`) localStorage.removeItem('khatam_acuan');
+  renderContinueWidget();
+  renderKhatamPicker();
+}
+
+renderContinueWidget();
+
+// Progress Khatam — user pilih acuan dari bookmark_slots
+const surahAyatCounts = [0,7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
+const totalAyat = 6236;
+
+function hitungProgressDari(surahNum, ayatNum) {
+  // Progress dihitung dari posisi bookmark:
+  // total ayat di surah 1 s/d (surahNum-1) + ayatNum di surah ini
+  let pos = 0;
+  for (let i = 1; i < parseInt(surahNum); i++) pos += surahAyatCounts[i] || 0;
+  pos += parseInt(ayatNum);
+  return pos;
+}
+
+function updateKhatamDisplay(readAyat) {
+  const pct = Math.min(Math.round((readAyat / totalAyat) * 100), 100);
+  const juz = Math.min(Math.floor((readAyat / totalAyat) * 30), 30);
+  document.getElementById('khatam-pct').textContent = pct + '%';
+  document.getElementById('khatam-juz').textContent = `Juz ${juz} / 30`;
+  document.getElementById('khatam-bar').style.width = pct + '%';
+  // Tampilkan juga jumlah ayat
+  const info = document.getElementById('khatam-ayat-info');
+  if (info) info.textContent = `${readAyat.toLocaleString()} / 6.236 ayat`;
+}
+
+function renderKhatamPicker() {
+  const slots = (() => { try { return JSON.parse(localStorage.getItem('bookmark_slots') || '[]'); } catch { return []; } })();
+  const picker = document.getElementById('khatam-picker');
+  const savedVal = localStorage.getItem('khatam_acuan');
+
+  // Isi dropdown
+  picker.innerHTML = '<option value="">-- Pilih tanda baca --</option>';
+  slots.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = `${s.surah}_${s.ayat}`;
+    opt.textContent = `${s.nama} • Ayat ${s.ayat}`;
+    if (savedVal === opt.value) opt.selected = true;
+    picker.appendChild(opt);
+  });
+
+  // Tampilkan progress dari pilihan tersimpan
+  if (savedVal && slots.find(s => `${s.surah}_${s.ayat}` === savedVal)) {
+    const [su, ay] = savedVal.split('_').map(Number);
+    updateKhatamDisplay(hitungProgressDari(su, ay));
+  } else {
+    updateKhatamDisplay(0);
+  }
+
+  // Event saat user ganti pilihan
+  picker.onchange = function() {
+    if (!this.value) { updateKhatamDisplay(0); localStorage.removeItem('khatam_acuan'); return; }
+    localStorage.setItem('khatam_acuan', this.value);
+    const [su, ay] = this.value.split('_').map(Number);
+    updateKhatamDisplay(hitungProgressDari(su, ay));
+  };
+}
+
+renderKhatamPicker();
+
+// Ayat Hari Ini — ganti setiap hari otomatis
+const ayatHarian = [
+  { teks: "Sesungguhnya bersama kesulitan ada kemudahan.", ref: "Surah Ash-Sharh (94:6)" },
+  { teks: "Dan Dia bersama kamu di mana saja kamu berada.", ref: "Surah Al-Hadid (57:4)" },
+  { teks: "Sesungguhnya Allah tidak mengubah keadaan suatu kaum sebelum mereka mengubah keadaan diri mereka sendiri.", ref: "Surah Ar-Ra'd (13:11)" },
+  { teks: "Dan apabila hamba-hamba-Ku bertanya kepadamu tentang Aku, maka sesungguhnya Aku dekat.", ref: "Surah Al-Baqarah (2:186)" },
+  { teks: "Cukuplah Allah sebagai penolong kami dan Dia sebaik-baik pelindung.", ref: "Surah Ali 'Imran (3:173)" },
+  { teks: "Barang siapa bertakwa kepada Allah, niscaya Dia akan membukakan jalan keluar baginya.", ref: "Surah At-Talaq (65:2)" },
+  { teks: "Dan janganlah kamu berputus asa dari rahmat Allah.", ref: "Surah Az-Zumar (39:53)" },
+  { teks: "Sesungguhnya shalat itu mencegah dari perbuatan keji dan mungkar.", ref: "Surah Al-'Ankabut (29:45)" },
+  { teks: "Maka ingatlah kepada-Ku, Aku pun akan ingat kepadamu.", ref: "Surah Al-Baqarah (2:152)" },
+  { teks: "Dan Tuhanmu berfirman, Berdoalah kepada-Ku, niscaya akan Aku perkenankan bagimu.", ref: "Surah Ghafir (40:60)" },
+  { teks: "Sesungguhnya orang-orang yang beriman dan beramal saleh, mereka itu adalah sebaik-baik makhluk.", ref: "Surah Al-Bayyinah (98:7)" },
+  { teks: "Dan bertawakallah kepada Allah. Cukuplah Allah sebagai pemelihara.", ref: "Surah Al-Ahzab (33:3)" },
+  { teks: "Katakanlah, Sesungguhnya shalatku, ibadahku, hidupku dan matiku hanyalah untuk Allah.", ref: "Surah Al-An'am (6:162)" },
+  { teks: "Demi masa. Sungguh, manusia berada dalam kerugian, kecuali orang-orang yang beriman.", ref: "Surah Al-'Asr (103:1-3)" },
+  { teks: "Dan Kami telah memuliakan anak cucu Adam.", ref: "Surah Al-Isra (17:70)" },
+  { teks: "Sesungguhnya Allah mencintai orang-orang yang bertawakal.", ref: "Surah Ali 'Imran (3:159)" },
+  { teks: "Wahai jiwa yang tenang, kembalilah kepada Tuhanmu dengan hati yang ridha lagi diridhai-Nya.", ref: "Surah Al-Fajr (89:27-28)" },
+  { teks: "Dan sungguh, bersama kesulitan ada kemudahan. Maka apabila engkau telah selesai, tetaplah bekerja keras.", ref: "Surah Ash-Sharh (94:6-7)" },
+  { teks: "Allah tidak membebani seseorang melainkan sesuai dengan kesanggupannya.", ref: "Surah Al-Baqarah (2:286)" },
+  { teks: "Sesungguhnya orang-orang yang bersabar akan diberi pahala tanpa batas.", ref: "Surah Az-Zumar (39:10)" },
+  { teks: "Dan mohonlah pertolongan dengan sabar dan shalat.", ref: "Surah Al-Baqarah (2:45)" },
+  { teks: "Sesungguhnya Allah beserta orang-orang yang sabar.", ref: "Surah Al-Baqarah (2:153)" },
+  { teks: "Janganlah kamu bersedih, sesungguhnya Allah bersama kami.", ref: "Surah At-Tawbah (9:40)" },
+  { teks: "Dan hanya kepada Allah hendaknya kamu bertawakal, jika kamu benar-benar orang yang beriman.", ref: "Surah Al-Ma'idah (5:23)" },
+  { teks: "Sesungguhnya sesudah kesulitan itu ada kemudahan.", ref: "Surah Ash-Sharh (94:5)" },
+  { teks: "Dia mengetahui apa yang ada di langit dan di bumi, dan mengetahui apa yang kamu rahasiakan.", ref: "Surah At-Taghabun (64:4)" },
+  { teks: "Dan Kami jadikan dari air segala sesuatu yang hidup.", ref: "Surah Al-Anbiya (21:30)" },
+  { teks: "Katakanlah, Dialah Allah Yang Maha Esa.", ref: "Surah Al-Ikhlas (112:1)" },
+  { teks: "Maka nikmat Tuhanmu yang manakah yang kamu dustakan?", ref: "Surah Ar-Rahman (55:13)" },
+  { teks: "Dan Dia-lah yang menciptakan langit dan bumi dalam enam masa.", ref: "Surah Hud (11:7)" },
+];
+
+(function() {
+  const today = new Date();
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+  const ayat = ayatHarian[dayOfYear % ayatHarian.length];
+  document.getElementById('ayat-hari-ini-text').textContent = `"${ayat.teks}"`;
+  document.getElementById('ayat-hari-ini-ref').textContent = `— ${ayat.ref}`;
+})();
+
+document.querySelector('input[type="text"]').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  if (!q) { renderSurahs(surahs); return; }
+  renderSurahs(surahs.filter(([num, name, meaning]) =>
+    name.toLowerCase().includes(q) ||
+    meaning.toLowerCase().includes(q) ||
+    String(num).includes(q)
+  ));
+});
+
+document.querySelector('button.absolute').addEventListener('click', function() {
+  const q = document.querySelector('input[type="text"]').value.toLowerCase().trim();
+  if (!q) { renderSurahs(surahs); return; }
+  renderSurahs(surahs.filter(([num, name, meaning]) =>
+    name.toLowerCase().includes(q) ||
+    meaning.toLowerCase().includes(q) ||
+    String(num).includes(q)
+  ));
+});
+</script>
+</div>
+<!-- Right Sidebar -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-emerald-900 text-white font-manrope text-xs font-light border-t border-emerald-800 mt-auto">
+  <div class="w-full py-10 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Brand -->
+      <span class="text-lg font-semibold text-emerald-50">Masjid Raya Bintaro Jaya</span>
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Privacy Policy</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Terms of Service</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Donation FAQ</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Contact Support</a>
+      </div>
+      <!-- Sosmed + Copyright -->
+      <div class="flex flex-col items-center md:items-end gap-3">
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/mrbjtangsel.official" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/628111055005" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://web.facebook.com/mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/c/MasjidRayaBintaroJayaTV" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+        <p class="text-emerald-100/70">© 2024 Masjid Raya Bintaro Jaya. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>

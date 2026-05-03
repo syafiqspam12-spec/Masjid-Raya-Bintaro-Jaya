@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Jadwal Kajian Islam - Masjid Raya Bintaro Jaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface":"#f8faf8","primary":"#00342b","on-primary":"#ffffff",
+        "primary-container":"#004d40","on-primary-container":"#7ebdac",
+        "secondary-container":"#fed488","on-secondary-container":"#785a1a",
+        "surface-container-lowest":"#ffffff","surface-container":"#eceeec",
+        "surface-container-low":"#f2f4f2","surface-container-high":"#e6e9e7",
+        "on-surface":"#191c1b","on-surface-variant":"#3f4945",
+        "outline":"#707975","outline-variant":"#bfc9c4",
+        "primary-fixed":"#afefdd","primary-fixed-dim":"#94d3c1",
+        "secondary-fixed":"#ffdea5","error":"#ba1a1a"
+      },
+      fontFamily: {
+        "sans":["Manrope"]
+      }
+    }
+  }
+}
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  @media (max-width: 767px) {
+    .text-4xl { font-size: 1.75rem !important; }
+    .text-2xl { font-size: 1.25rem !important; }
+  }
+</style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col font-sans">
+
+<!-- Navbar -->
+<nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-emerald-100 shadow-sm">
+  <div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+    <div class="flex items-center gap-3">
+      <button class="md:hidden text-emerald-900 p-1 rounded-lg hover:bg-emerald-50" onclick="toggleMenu()">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <img src="logomasjid.jpg" alt="Logo" class="h-10 w-10 object-contain rounded-full border border-gray-200"/>
+      <span class="text-xl font-bold text-emerald-900 tracking-tight">Masjid Raya Bintaro Jaya</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 font-manrope text-sm font-semibold tracking-wide">
+      <a href="home.html" class="text-slate-600 hover:text-emerald-800 transition-colors">Beranda</a>
+      <a href="alqur'an.html" class="text-slate-600 hover:text-emerald-800 transition-colors">Al-Qur'an</a>
+      <a href="service.html" class="text-slate-600 hover:text-emerald-800 transition-colors">Layanan</a>
+      <a href="contack.html" class="text-slate-600 hover:text-emerald-800 transition-colors">Kontak</a>
+    </div>
+    <button class="bg-emerald-900 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-emerald-800 transition-colors">Zakat Now</button>
+  </div>
+</nav>
+<!-- Mobile Menu -->
+<div id="mobile-menu" style="display:none;" class="bg-white border-b border-emerald-100 shadow-sm z-40">
+  <div class="flex flex-col px-6 py-4 gap-4 text-sm font-semibold">
+    <a href="home.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Beranda</a>
+    <a href="alqur'an.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Al-Qur'an</a>
+    <a href="service.html" class="text-slate-600 hover:text-emerald-800 py-2 border-b border-gray-100">Layanan</a>
+    <a href="contack.html" class="text-slate-600 hover:text-emerald-800 py-2">Kontak</a>
+  </div>
+</div>
+<script>function toggleMenu(){var m=document.getElementById('mobile-menu');m.style.display=m.style.display==='none'?'block':'none';}</script>
+
+<!-- Main -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 py-10">
+
+  <!-- Header + Kalender sejajar -->
+  <div class="flex flex-col lg:flex-row gap-6 items-start mb-8">
+
+    <!-- Header kiri -->
+    <div class="flex-1">
+      <a href="home.html" class="inline-flex items-center gap-2 text-primary text-sm font-semibold mb-4 hover:underline">
+        <span class="material-symbols-outlined text-base">arrow_back</span> Kembali ke Beranda
+      </a>
+      <h1 class="text-4xl font-bold text-primary mb-2">Jadwal Kajian Islam</h1>
+      <p class="text-on-surface-variant max-w-md">Program kajian rutin Masjid Raya Bintaro Jaya. Hadir dan tingkatkan ilmu agama bersama para ustadz pilihan.</p>
+    </div>
+
+    <!-- Kalender kanan -->
+    <div class="w-full lg:w-72 flex-shrink-0 lg:sticky lg:top-24">
+      <div class="bg-white rounded-2xl border border-outline-variant shadow-sm overflow-hidden">
+        <div class="bg-primary text-on-primary flex items-center justify-between px-4 py-3">
+          <button onclick="gantibulan(-1)" class="p-1 rounded-full hover:bg-white/20 transition-colors">
+            <span class="material-symbols-outlined text-sm">chevron_left</span>
+          </button>
+          <h2 id="kal-judul" class="font-bold text-sm"></h2>
+          <button onclick="gantibulan(1)" class="p-1 rounded-full hover:bg-white/20 transition-colors">
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+          </button>
+        </div>
+        <div class="grid grid-cols-7 border-b border-outline-variant/30 px-2 pt-2">
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Min</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Sen</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Sel</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Rab</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Kam</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Jum</div>
+          <div class="text-center text-[10px] font-bold text-on-surface-variant pb-1">Sab</div>
+        </div>
+        <div id="kal-grid" class="grid grid-cols-7 gap-0.5 p-2"></div>
+        <div class="px-3 pb-3">
+          <button onclick="pilihSemua()" id="btn-semua" class="w-full py-2 rounded-xl text-xs font-semibold bg-surface-container text-on-surface hover:bg-primary hover:text-on-primary transition-colors">
+            Semua Kajian
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Label terpilih + Jadwal -->
+  <div class="flex-1 min-w-0">
+    <div id="label-terpilih" class="hidden mb-4 flex items-center gap-2 text-sm font-semibold text-primary">
+      <span class="material-symbols-outlined text-base">event</span>
+      <span id="label-terpilih-text"></span>
+    </div>
+    <div id="jadwal-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4"></div>
+    <p id="empty-kajian" class="hidden text-center text-on-surface-variant py-16 text-sm">Tidak ada kajian pada tanggal ini.</p>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-emerald-900 text-white font-manrope text-xs font-light border-t border-emerald-800 mt-auto">
+  <div class="w-full py-10 px-6 max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <!-- Brand -->
+      <span class="text-lg font-semibold text-emerald-50">Masjid Raya Bintaro Jaya</span>
+      <!-- Links -->
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Privacy Policy</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Terms of Service</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Donation FAQ</a>
+        <a class="text-emerald-100/70 hover:text-white transition-colors" href="#">Contact Support</a>
+      </div>
+      <!-- Sosmed + Copyright -->
+      <div class="flex flex-col items-center md:items-end gap-3">
+        <div class="flex items-center gap-4">
+          <a href="https://www.instagram.com/mrbjtangsel.official" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.975.975 1.246 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.975-.975-1.246-2.242-1.308-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.062-1.366.334-2.633 1.308-3.608.975-.975 2.242-1.246 3.608-1.308C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="https://wa.me/628111055005" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+          <a href="https://web.facebook.com/mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          </a>
+          <a href="#" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@mrbjtangsel" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="TikTok">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+          </a>
+          <a href="https://www.youtube.com/c/MasjidRayaBintaroJayaTV" target="_blank" rel="noopener noreferrer" class="text-emerald-100/70 hover:text-white transition-colors" aria-label="YouTube">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+        <p class="text-emerald-100/70">© 2024 Masjid Raya Bintaro Jaya. All Rights Reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const jadwalKajian = [];
+
+
+const hariLabel = {
+  senin:"Senin", selasa:"Selasa", rabu:"Rabu",
+  kamis:"Kamis", jumat:"Jumat", sabtu:"Sabtu", ahad:"Ahad"
+};
+
+// Tandai hari ini
+const hariIni = ['ahad','senin','selasa','rabu','kamis','jumat','sabtu'][new Date().getDay()];
+
+// Hitung tanggal berikutnya untuk hari tertentu
+function tanggalBerikutnya(hariStr) {
+  const hariMap = {ahad:0,senin:1,selasa:2,rabu:3,kamis:4,jumat:5,sabtu:6};
+  const target = hariMap[hariStr];
+  const now = new Date();
+  const today = now.getDay();
+  let diff = target - today;
+  if (diff < 0) diff += 7;
+  if (diff === 0) diff = 0; // hari ini
+  const tgl = new Date(now);
+  tgl.setDate(now.getDate() + diff);
+  return tgl.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
+}
+
+// ===== KALENDER =====
+let kalTahun = new Date().getFullYear();
+let kalBulan = new Date().getMonth(); // 0-11
+let terpilihTgl = null; // null = semua
+
+const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const hariArr = ['ahad','senin','selasa','rabu','kamis','jumat','sabtu'];
+
+function renderKalender() {
+  const semua = getAllKajian();
+  document.getElementById('kal-judul').textContent = namaBulan[kalBulan] + ' ' + kalTahun;
+  const grid = document.getElementById('kal-grid');
+  grid.innerHTML = '';
+
+  const tglPertama = new Date(kalTahun, kalBulan, 1);
+  const tglTerakhir = new Date(kalTahun, kalBulan + 1, 0);
+  const hariMulai = tglPertama.getDay(); // 0=Minggu
+
+  // Kumpulkan tanggal yang ada kajian
+  const tglAdaKajian = new Set();
+  semua.forEach(j => {
+    if (j.tanggal) {
+      const d = new Date(j.tanggal + 'T00:00:00');
+      if (d.getFullYear() === kalTahun && d.getMonth() === kalBulan) {
+        tglAdaKajian.add(d.getDate());
+      }
+    } else {
+      // Kajian rutin tanpa tanggal — tandai semua hari yang sesuai di bulan ini
+      for (let t = 1; t <= tglTerakhir.getDate(); t++) {
+        const d = new Date(kalTahun, kalBulan, t);
+        if (hariArr[d.getDay()] === j.hari) tglAdaKajian.add(t);
+      }
+    }
+  });
+
+  // Sel kosong sebelum hari pertama
+  for (let i = 0; i < hariMulai; i++) {
+    grid.innerHTML += `<div></div>`;
+  }
+
+  const today = new Date();
+  for (let t = 1; t <= tglTerakhir.getDate(); t++) {
+    const isToday = today.getFullYear()===kalTahun && today.getMonth()===kalBulan && today.getDate()===t;
+    const isSelected = terpilihTgl && terpilihTgl.getDate()===t && terpilihTgl.getMonth()===kalBulan && terpilihTgl.getFullYear()===kalTahun;
+    const adaKajian = tglAdaKajian.has(t);
+    const tglStr = `${kalTahun}-${String(kalBulan+1).padStart(2,'0')}-${String(t).padStart(2,'0')}`;
+
+    let cls = 'relative flex flex-col items-center justify-center rounded-lg py-1 text-xs font-semibold cursor-pointer transition-all select-none ';
+    if (isSelected) cls += 'bg-primary text-white shadow-md';
+    else if (isToday) cls += 'bg-primary/10 text-primary border border-primary';
+    else if (adaKajian) cls += 'bg-surface-container text-on-surface hover:bg-primary/20';
+    else cls += 'text-on-surface-variant hover:bg-surface-container cursor-default opacity-40';
+
+    grid.innerHTML += `
+      <div class="${cls}" onclick="${adaKajian ? `pilihTanggal('${tglStr}')` : ''}">
+        ${t}
+        ${adaKajian ? `<span class="absolute bottom-1 w-1 h-1 rounded-full ${isSelected ? 'bg-white' : 'bg-primary'}"></span>` : ''}
+      </div>`;
+  }
+}
+
+function gantibulan(arah) {
+  kalBulan += arah;
+  if (kalBulan < 0) { kalBulan = 11; kalTahun--; }
+  if (kalBulan > 11) { kalBulan = 0; kalTahun++; }
+  terpilihTgl = null;
+  renderKalender();
+  renderJadwal(null);
+  document.getElementById('label-terpilih').classList.add('hidden');
+  document.getElementById('btn-semua').classList.remove('bg-primary','text-white');
+  document.getElementById('btn-semua').classList.add('bg-surface-container','text-on-surface');
+}
+
+function pilihTanggal(tglStr) {
+  // Parse manual agar tidak kena timezone shift
+  const [y, m, d] = tglStr.split('-').map(Number);
+  terpilihTgl = new Date(y, m - 1, d);
+  renderKalender();
+  renderJadwal(terpilihTgl);
+  const label = document.getElementById('label-terpilih');
+  label.classList.remove('hidden');
+  document.getElementById('label-terpilih-text').textContent =
+    'Kajian pada ' + terpilihTgl.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('btn-semua').classList.remove('bg-primary','text-white');
+  document.getElementById('btn-semua').classList.add('bg-surface-container','text-on-surface');
+}
+
+function pilihSemua() {
+  terpilihTgl = null;
+  renderKalender();
+  renderJadwal(null);
+  document.getElementById('label-terpilih').classList.add('hidden');
+  document.getElementById('btn-semua').classList.add('bg-primary','text-white');
+  document.getElementById('btn-semua').classList.remove('bg-surface-container','text-on-surface');
+}
+
+function renderJadwal(filterTgl) {
+  const semua = getAllKajian();
+  const grid = document.getElementById('jadwal-grid');
+  const empty = document.getElementById('empty-kajian');
+  let list;
+
+  if (!filterTgl) {
+    // Tampilkan semua, urutkan berdasarkan tanggal
+    list = semua.sort((a, b) => {
+      const da = a.tanggal ? new Date(a.tanggal) : new Date(9999,0,1);
+      const db = b.tanggal ? new Date(b.tanggal) : new Date(9999,0,1);
+      return da - db;
+    });
+  } else {
+    const hariTerpilih = hariArr[filterTgl.getDay()];
+    // Buat string YYYY-MM-DD dari objek Date lokal (bukan UTC)
+    const y = filterTgl.getFullYear();
+    const m = String(filterTgl.getMonth()+1).padStart(2,'0');
+    const d = String(filterTgl.getDate()).padStart(2,'0');
+    const tglISO = `${y}-${m}-${d}`;
+    list = semua.filter(j => {
+      if (j.tanggal) return j.tanggal === tglISO;
+      return j.hari === hariTerpilih;
+    });
+  }
+
+  if (list.length === 0) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  grid.innerHTML = list.map(j => {
+    // Tentukan tanggal yang ditampilkan
+    let tglTampil, isHariIni;
+    if (j.tanggal) {
+      // Kajian dengan tanggal spesifik
+      const d = new Date(j.tanggal + 'T00:00:00');
+      tglTampil = d.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+      const today = new Date();
+      isHariIni = d.getDate()===today.getDate() && d.getMonth()===today.getMonth() && d.getFullYear()===today.getFullYear();
+    } else if (filterTgl) {
+      // Kajian rutin, tampilkan tanggal yang dipilih user
+      tglTampil = filterTgl.toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'});
+      const today = new Date();
+      isHariIni = filterTgl.getDate()===today.getDate() && filterTgl.getMonth()===today.getMonth() && filterTgl.getFullYear()===today.getFullYear();
+    } else {
+      // Tampil semua — hitung tanggal berikutnya
+      tglTampil = tanggalBerikutnya(j.hari);
+      isHariIni = j.hari === hariIni;
+    }
+    return `
+    <div class="rounded-2xl border-2 ${j.warna} overflow-hidden flex flex-col hover:shadow-md transition-all cursor-pointer" onclick="bukaDetail(${JSON.stringify({...j, _tglTampil: tglTampil}).replace(/"/g,'&quot;')})">
+      ${j.gambar ? `<img src="${j.gambar}" alt="${j.nama}" class="w-full h-48 object-cover" style="object-position: ${j.gambarPos || '50% 30%'}; transform: scale(${j.gambarZoom ? j.gambarZoom/100 : 1}); transform-origin: ${j.gambarPos || '50% 30%'};"/>` : ''}
+      <div class="p-5 flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <span class="px-3 py-1 rounded-full text-xs font-bold ${j.badge}">${j.tema}</span>
+          <span class="text-xs font-semibold text-on-surface-variant flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">calendar_today</span>
+            ${hariLabel[j.hari]}${isHariIni ? ' <span class="ml-1 px-2 py-0.5 bg-primary text-on-primary rounded-full text-[10px]">Hari Ini</span>' : ''}
+          </span>
+        </div>
+        <h3 class="text-base font-bold text-on-surface leading-snug">${j.nama}</h3>
+        <div class="flex items-center gap-2 text-sm ${isHariIni ? 'text-primary font-semibold' : 'text-on-surface-variant'}">
+          <span class="material-symbols-outlined text-base">event</span>
+          <span>${isHariIni ? 'Hari ini, ' : ''}${tglTampil}</span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-on-surface-variant">
+          <span class="material-symbols-outlined text-base text-primary">schedule</span>
+          <span>${j.waktu}</span>
+        </div>
+        <p class="text-xs text-primary font-semibold mt-1 flex items-center gap-1">
+          Lihat detail <span class="material-symbols-outlined text-sm">arrow_forward</span>
+        </p>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Init kalender
+renderKalender();
+pilihSemua();
+function getAllKajian() {
+  try {
+    const custom = JSON.parse(localStorage.getItem('kajian_custom') || '[]');
+    // Tambahkan warna otomatis berdasarkan tema
+    const temaWarna = {
+      Tafsir:   {warna:'bg-emerald-50 border-emerald-200', badge:'bg-emerald-100 text-emerald-800'},
+      Hadits:   {warna:'bg-amber-50 border-amber-200',     badge:'bg-amber-100 text-amber-800'},
+      Fiqh:     {warna:'bg-blue-50 border-blue-200',       badge:'bg-blue-100 text-blue-800'},
+      Akidah:   {warna:'bg-purple-50 border-purple-200',   badge:'bg-purple-100 text-purple-800'},
+      Sirah:    {warna:'bg-orange-50 border-orange-200',   badge:'bg-orange-100 text-orange-800'},
+      Tahsin:   {warna:'bg-teal-50 border-teal-200',       badge:'bg-teal-100 text-teal-800'},
+      Muslimah: {warna:'bg-pink-50 border-pink-200',       badge:'bg-pink-100 text-pink-800'},
+      Remaja:   {warna:'bg-indigo-50 border-indigo-200',   badge:'bg-indigo-100 text-indigo-800'},
+      Anak:     {warna:'bg-yellow-50 border-yellow-200',   badge:'bg-yellow-100 text-yellow-800'},
+      Keluarga: {warna:'bg-rose-50 border-rose-200',       badge:'bg-rose-100 text-rose-800'},
+      Khutbah:  {warna:'bg-emerald-50 border-emerald-200', badge:'bg-emerald-100 text-emerald-800'},
+      Umum:     {warna:'bg-sky-50 border-sky-200',         badge:'bg-sky-100 text-sky-800'},
+    };
+    const customWithColor = custom.map(j => ({
+      ...j,
+      ...(temaWarna[j.tema] || temaWarna['Umum'])
+    }));
+    return [...jadwalKajian, ...customWithColor];
+  } catch { return jadwalKajian; }
+}
+
+renderJadwal('semua');
+
+function bukaDetail(j) {
+  const temaWarna = {
+    Tafsir:'bg-emerald-100 text-emerald-800', Hadits:'bg-amber-100 text-amber-800',
+    Fiqh:'bg-blue-100 text-blue-800', Akidah:'bg-purple-100 text-purple-800',
+    Sirah:'bg-orange-100 text-orange-800', Tahsin:'bg-teal-100 text-teal-800',
+    Muslimah:'bg-pink-100 text-pink-800', Remaja:'bg-indigo-100 text-indigo-800',
+    Anak:'bg-yellow-100 text-yellow-800', Keluarga:'bg-rose-100 text-rose-800',
+    Khutbah:'bg-emerald-100 text-emerald-800', Umum:'bg-sky-100 text-sky-800'
+  };
+  const tgl = j._tglTampil || (j.tanggal
+    ? new Date(j.tanggal+'T00:00:00').toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'})
+    : tanggalBerikutnya(j.hari));
+
+  document.getElementById('modal-nama').textContent = j.nama;
+  document.getElementById('modal-ustadz').textContent = j.ustadz;
+  document.getElementById('modal-tanggal').textContent = tgl;
+  document.getElementById('modal-waktu').textContent = j.waktu;
+  document.getElementById('modal-tempat').textContent = j.tempat;
+  const badge = document.getElementById('modal-badge');
+  badge.textContent = j.tema;
+  badge.className = 'px-3 py-1 rounded-full text-xs font-bold ' + (temaWarna[j.tema] || 'bg-sky-100 text-sky-800');
+
+  const gambarWrap = document.getElementById('modal-gambar-wrap');
+  if (j.gambar) {
+    document.getElementById('modal-gambar').src = j.gambar;
+    gambarWrap.classList.remove('hidden');
+  } else {
+    gambarWrap.classList.add('hidden');
+  }
+  document.getElementById('modal-detail').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function tutupDetail() {
+  document.getElementById('modal-detail').style.display = 'none';
+  document.body.style.overflow = '';
+}
+</script>
+
+<!-- Modal Detail Kajian -->
+<div id="modal-detail" style="display:none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4 py-6" onclick="if(event.target===this)tutupDetail()">
+  <div class="bg-white rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
+    <!-- Gambar -->
+    <div id="modal-gambar-wrap" class="hidden relative">
+      <img id="modal-gambar" src="" alt="" class="w-full object-contain rounded-t-2xl"/>
+    </div>
+    <!-- Konten -->
+    <div class="p-6">
+      <div class="flex items-center justify-between mb-3">
+        <span id="modal-badge" class="px-3 py-1 rounded-full text-xs font-bold"></span>
+        <button onclick="tutupDetail()" class="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container transition-colors">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <h2 id="modal-nama" class="text-xl font-bold text-on-surface mb-4"></h2>
+      <div class="flex flex-col gap-3 text-sm">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">event</span>
+          <div>
+            <p class="text-xs text-on-surface-variant">Tanggal</p>
+            <p id="modal-tanggal" class="font-semibold text-on-surface"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">person</span>
+          <div>
+            <p class="text-xs text-on-surface-variant">Ustadz/Ustadzah</p>
+            <p id="modal-ustadz" class="font-semibold text-on-surface"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">schedule</span>
+          <div>
+            <p class="text-xs text-on-surface-variant">Waktu</p>
+            <p id="modal-waktu" class="font-semibold text-on-surface"></p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">location_on</span>
+          <div>
+            <p class="text-xs text-on-surface-variant">Tempat</p>
+            <p id="modal-tempat" class="font-semibold text-on-surface"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
