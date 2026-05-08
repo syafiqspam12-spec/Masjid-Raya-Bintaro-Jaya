@@ -163,7 +163,7 @@
                         Bergabunglah bersama komunitas kami dalam menumbuhkan spiritualitas, kepedulian, dan ilmu di jantung Bintaro.
                     </p>
 <div class="pt-stack-sm">
-<button class="bg-primary text-on-primary font-title-sm text-title-sm px-8 py-4 rounded-lg hover:bg-primary-container transition-colors">
+<button onclick="location.href='contack.html'" class="bg-primary text-on-primary font-title-sm text-title-sm px-8 py-4 rounded-lg hover:bg-primary-container transition-colors">
                             Rencanakan Kunjungan
                         </button>
 </div>
@@ -245,7 +245,7 @@
                         </span>
 <h3 class="font-display-lg text-display-lg text-on-primary">Qurban 1445H</h3>
 <p class="font-body-md text-body-md text-primary-fixed">Pastikan kurban Anda sampai kepada yang paling membutuhkan. Ikuti program Qurban kami yang terorganisir.</p>
-<button class="mt-4 bg-secondary-container text-on-secondary-container font-title-sm text-title-sm px-6 py-3 rounded-lg hover:bg-secondary-fixed transition-colors">
+<button onclick="bukaModalQurban()" class="mt-4 bg-secondary-container text-on-secondary-container font-title-sm text-title-sm px-6 py-3 rounded-lg hover:bg-secondary-fixed transition-colors">
                             Daftar Qurban
                         </button>
 </div>
@@ -255,7 +255,7 @@
 </div>
 </div>
 <!-- Sedekah Shubuh Banner (Smaller) -->
-<div class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-container p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-fixed-dim transition-colors">
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-surface-container p-8 flex flex-col justify-between group cursor-pointer hover:border-primary-fixed-dim transition-colors" onclick="location.href='service.html'">
 <div>
 <div class="w-12 h-12 bg-surface-container-low rounded-full flex items-center justify-center mb-6 group-hover:bg-primary-fixed-dim/20 transition-colors">
 <span class="material-symbols-outlined text-primary text-2xl" data-icon="volunteer_activism">volunteer_activism</span>
@@ -623,4 +623,181 @@ setInterval(() => {
     </div>
   </div>
 </footer>
+
+<!-- Midtrans Snap -->
+<script>
+var _snapReady = false;
+window.addEventListener('DOMContentLoaded', function() {
+  fetch('/.netlify/functions/get-client-key')
+    .then(r => r.json())
+    .then(data => {
+      var s = document.createElement('script');
+      s.src = data.isProduction
+        ? 'https://app.midtrans.com/snap/snap.js'
+        : 'https://app.sandbox.midtrans.com/snap/snap.js';
+      s.setAttribute('data-client-key', data.clientKey);
+      s.onload = function() { _snapReady = true; };
+      document.head.appendChild(s);
+    }).catch(() => {});
+});
+function waitSnapAndPay(token, callbacks) {
+  if (window.snap && _snapReady) {
+    window.snap.pay(token, callbacks);
+  } else {
+    setTimeout(function() { waitSnapAndPay(token, callbacks); }, 300);
+  }
+}
+</script>
+
+<!-- Modal Qurban -->
+<div id="modal-qurban" style="display:none;" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 px-0 sm:px-4" onclick="if(event.target===this)tutupModalQurban()">
+  <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden">
+    <!-- Header -->
+    <div class="bg-primary text-white px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        <h2 class="font-bold text-base">Program Qurban 1445H</h2>
+      </div>
+      <button onclick="tutupModalQurban()" class="p-1 rounded-full hover:bg-white/20 transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+
+    <div class="px-6 py-5 flex flex-col gap-5 max-h-[80vh] overflow-y-auto">
+      <!-- Info -->
+      <div class="bg-primary/5 rounded-xl p-4 flex items-start gap-3">
+        <span class="material-symbols-outlined text-primary mt-0.5" style="font-variation-settings:'FILL' 1;">info</span>
+        <p class="text-sm text-on-surface-variant">Pastikan kurban Anda sampai kepada yang paling membutuhkan. Pilih jenis hewan qurban di bawah ini.</p>
+      </div>
+
+      <!-- Pilihan Qurban -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-3">Pilih Jenis Qurban</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Sapi Patungan -->
+          <label class="cursor-pointer">
+            <input type="radio" name="jenis_qurban" value="sapi_patungan" class="sr-only peer" onchange="updateHargaQurban()"/>
+            <div class="border-2 border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors">
+              <p class="font-bold text-on-surface text-sm">🐄 Sapi Patungan (1/7)</p>
+              <p class="text-primary font-bold text-lg mt-1">Rp 3.500.000</p>
+              <p class="text-xs text-on-surface-variant mt-1">Sapi Bali Tipe A • 250-300 kg</p>
+            </div>
+          </label>
+          <!-- Sapi 1 Ekor -->
+          <label class="cursor-pointer">
+            <input type="radio" name="jenis_qurban" value="sapi_penuh" class="sr-only peer" onchange="updateHargaQurban()"/>
+            <div class="border-2 border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors">
+              <p class="font-bold text-on-surface text-sm">🐄 Sapi 1 Ekor</p>
+              <p class="text-primary font-bold text-lg mt-1">Rp 24.500.000</p>
+              <p class="text-xs text-on-surface-variant mt-1">Sapi Bali Tipe A • 250-300 kg</p>
+            </div>
+          </label>
+          <!-- Kambing -->
+          <label class="cursor-pointer">
+            <input type="radio" name="jenis_qurban" value="kambing" class="sr-only peer" checked onchange="updateHargaQurban()"/>
+            <div class="border-2 border-primary bg-primary/5 rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors">
+              <p class="font-bold text-on-surface text-sm">🐑 Kambing Super</p>
+              <p class="text-primary font-bold text-lg mt-1">Rp 3.250.000</p>
+              <p class="text-xs text-on-surface-variant mt-1">25-30 kg • Gratis Penyaluran</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Nama Shohibul Qurban -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Nama Shohibul Qurban *</p>
+        <input id="qurban-nama" type="text" placeholder="Nama lengkap / Atas nama keluarga"
+          class="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"/>
+      </div>
+
+      <!-- Doa -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Doa <span class="font-normal text-on-surface-variant">(opsional)</span></p>
+        <textarea id="qurban-doa" maxlength="240" rows="2" placeholder="Tulis doa..."
+          class="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary resize-none"></textarea>
+      </div>
+
+      <!-- Total -->
+      <div class="bg-surface-container rounded-xl p-4 flex justify-between items-center">
+        <span class="text-sm font-semibold text-on-surface">Total Pembayaran</span>
+        <span class="font-bold text-primary text-lg" id="qurban-total">Rp 3.250.000</span>
+      </div>
+
+      <!-- Metode Pembayaran -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Metode Pembayaran</p>
+        <div class="border border-outline-variant rounded-xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">account_balance_wallet</span>
+            <div>
+              <p class="text-sm font-semibold text-on-surface">Transfer Bank / QRIS / E-Wallet</p>
+              <p class="text-xs text-on-surface-variant">Powered by Midtrans</p>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-primary">check_circle</span>
+        </div>
+      </div>
+
+      <!-- Tombol Bayar -->
+      <button onclick="bayarQurban()" class="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        Bayar Qurban Sekarang
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const hargaQurban = { kambing: 3250000, sapi_patungan: 3500000, sapi_penuh: 24500000 };
+const namaQurban = { kambing: 'Kambing Super', sapi_patungan: 'Sapi Patungan (1/7)', sapi_penuh: 'Sapi 1 Ekor' };
+
+function bukaModalQurban() {
+  document.getElementById('modal-qurban').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  updateHargaQurban();
+}
+function tutupModalQurban() {
+  document.getElementById('modal-qurban').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function updateHargaQurban() {
+  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value || 'kambing';
+  document.getElementById('qurban-total').textContent = 'Rp ' + hargaQurban[jenis].toLocaleString('id-ID');
+}
+async function bayarQurban() {
+  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value || 'kambing';
+  const nama = document.getElementById('qurban-nama').value.trim();
+  const doa = document.getElementById('qurban-doa').value;
+  if (!nama) { alert('Masukkan nama Shohibul Qurban'); return; }
+  const btn = event.target.closest('button');
+  btn.disabled = true;
+  btn.textContent = 'Memproses...';
+  try {
+    const res = await fetch('/.netlify/functions/create-transaction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        program: 'Qurban 1445H - ' + namaQurban[jenis],
+        nominal: hargaQurban[jenis],
+        nama, doa
+      })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    tutupModalQurban();
+    waitSnapAndPay(data.token, {
+      onSuccess: () => { window.location.href = '/payment-success.html?order_id=' + data.order_id; },
+      onPending: () => { alert('Selesaikan pembayaran Anda.'); },
+      onError: () => { alert('Pembayaran gagal. Coba lagi.'); }
+    });
+  } catch(e) {
+    alert('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Bayar Qurban Sekarang';
+  }
+}
+</script>
 </body></html>
+

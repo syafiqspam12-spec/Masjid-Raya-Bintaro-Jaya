@@ -7,6 +7,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <!-- Midtrans Snap dimuat dinamis dari server -->
 <script>
+var _snapReady = false;
 window.addEventListener('DOMContentLoaded', function() {
   fetch('/.netlify/functions/get-client-key')
     .then(r => r.json())
@@ -16,9 +17,17 @@ window.addEventListener('DOMContentLoaded', function() {
         ? 'https://app.midtrans.com/snap/snap.js'
         : 'https://app.sandbox.midtrans.com/snap/snap.js';
       s.setAttribute('data-client-key', data.clientKey);
+      s.onload = function() { _snapReady = true; };
       document.head.appendChild(s);
     });
 });
+function waitSnapAndPay(token, callbacks) {
+  if (window.snap && _snapReady) {
+    waitSnapAndPay(token, callbacks);
+  } else {
+    setTimeout(function() { waitSnapAndPay(token, callbacks); }, 300);
+  }
+}
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -325,7 +334,7 @@ window.addEventListener('DOMContentLoaded', function() {
 <p class="font-title-sm text-title-sm text-on-surface text-lg">Rp 24.500.000</p>
 </div>
 </div>
-<button class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
+<button onclick="bukaModalQurbanService('sapi_patungan')" class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
                             Pilih Qurban
                         </button>
 </div>
@@ -353,7 +362,7 @@ window.addEventListener('DOMContentLoaded', function() {
                                 </span>
 </div>
 </div>
-<button class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
+<button onclick="bukaModalQurbanService('kambing')" class="w-full py-2.5 rounded-lg border border-primary text-primary font-title-sm text-title-sm hover:bg-primary-fixed/10 transition-colors text-center">
                             Pilih Qurban
                         </button>
 </div>
@@ -672,7 +681,7 @@ function aktifkanDonasi() {
     if (data.error) throw new Error(data.error);
     tutupModalDonasi();
     // Buka Midtrans Snap popup
-    window.snap.pay(data.token, {
+    waitSnapAndPay(data.token, {
       onSuccess: (result) => {
         window.location.href = `/payment-success.html?order_id=${data.order_id}`;
       },
@@ -694,6 +703,133 @@ function aktifkanDonasi() {
     btn.textContent = document.getElementById('modal-btn-label')?.dataset?.label || 'Donasi Sekarang';
     btnEl.disabled = false;
   });
+}
+</script>
+
+<!-- Modal Qurban -->
+<div id="modal-qurban-svc" style="display:none;" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 px-0 sm:px-4" onclick="if(event.target===this)tutupModalQurbanSvc()">
+  <div class="bg-white w-full sm:max-w-lg rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden">
+    <div class="bg-primary text-white px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        <h2 class="font-bold text-base" id="qurban-svc-judul">Qurban</h2>
+      </div>
+      <button onclick="tutupModalQurbanSvc()" class="p-1 rounded-full hover:bg-white/20">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <div class="px-6 py-5 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
+      <!-- Pilihan sapi patungan / penuh -->
+      <div id="qurban-svc-opsi-sapi" class="hidden">
+        <p class="text-sm font-bold text-on-surface mb-3">Pilih Jenis Pembayaran Sapi</p>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="cursor-pointer">
+            <input type="radio" name="sapi_opsi" value="3500000" class="sr-only peer" checked onchange="updateTotalQurbanSvc()"/>
+            <div class="border-2 border-primary bg-primary/5 rounded-xl p-3 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors text-center">
+              <p class="font-bold text-sm text-on-surface">Patungan (1/7)</p>
+              <p class="text-primary font-bold">Rp 3.500.000</p>
+            </div>
+          </label>
+          <label class="cursor-pointer">
+            <input type="radio" name="sapi_opsi" value="24500000" class="sr-only peer" onchange="updateTotalQurbanSvc()"/>
+            <div class="border-2 border-outline-variant rounded-xl p-3 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors text-center">
+              <p class="font-bold text-sm text-on-surface">Satu Ekor</p>
+              <p class="text-primary font-bold">Rp 24.500.000</p>
+            </div>
+          </label>
+        </div>
+      </div>
+      <!-- Nama -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Nama Shohibul Qurban *</p>
+        <input id="qurban-svc-nama" type="text" placeholder="Nama lengkap / Atas nama keluarga"
+          class="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary"/>
+      </div>
+      <!-- Doa -->
+      <div>
+        <p class="text-sm font-bold text-on-surface mb-2">Doa <span class="font-normal text-on-surface-variant">(opsional)</span></p>
+        <textarea id="qurban-svc-doa" maxlength="240" rows="2" placeholder="Tulis doa..."
+          class="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary resize-none"></textarea>
+      </div>
+      <!-- Total -->
+      <div class="bg-surface-container rounded-xl p-4 flex justify-between items-center">
+        <span class="text-sm font-semibold text-on-surface">Total Pembayaran</span>
+        <span class="font-bold text-primary text-lg" id="qurban-svc-total">Rp 0</span>
+      </div>
+      <!-- Metode -->
+      <div class="border border-outline-variant rounded-xl p-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">account_balance_wallet</span>
+          <div>
+            <p class="text-sm font-semibold text-on-surface">Transfer Bank / QRIS / E-Wallet</p>
+            <p class="text-xs text-on-surface-variant">Powered by Midtrans</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-primary">check_circle</span>
+      </div>
+      <button onclick="bayarQurbanSvc()" class="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">volunteer_activism</span>
+        Bayar Qurban Sekarang
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let _qurbanJenis = 'kambing';
+const _hargaQurban = { kambing: 3250000, sapi_patungan: 3500000, sapi_penuh: 24500000 };
+const _namaQurban = { kambing: 'Kambing Super', sapi_patungan: 'Sapi Patungan (1/7)', sapi_penuh: 'Sapi 1 Ekor' };
+
+function bukaModalQurbanService(jenis) {
+  _qurbanJenis = jenis;
+  document.getElementById('modal-qurban-svc').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  const isSapi = jenis === 'sapi_patungan';
+  document.getElementById('qurban-svc-opsi-sapi').classList.toggle('hidden', !isSapi);
+  document.getElementById('qurban-svc-judul').textContent = isSapi ? 'Qurban Sapi' : 'Qurban Kambing';
+  updateTotalQurbanSvc();
+}
+function tutupModalQurbanSvc() {
+  document.getElementById('modal-qurban-svc').style.display = 'none';
+  document.body.style.overflow = '';
+}
+function updateTotalQurbanSvc() {
+  let nominal;
+  if (_qurbanJenis === 'sapi_patungan') {
+    nominal = parseInt(document.querySelector('input[name="sapi_opsi"]:checked')?.value || 3500000);
+  } else {
+    nominal = _hargaQurban[_qurbanJenis];
+  }
+  document.getElementById('qurban-svc-total').textContent = 'Rp ' + nominal.toLocaleString('id-ID');
+}
+async function bayarQurbanSvc() {
+  const nama = document.getElementById('qurban-svc-nama').value.trim();
+  const doa = document.getElementById('qurban-svc-doa').value;
+  if (!nama) { alert('Masukkan nama Shohibul Qurban'); return; }
+  let nominal;
+  if (_qurbanJenis === 'sapi_patungan') {
+    nominal = parseInt(document.querySelector('input[name="sapi_opsi"]:checked')?.value || 3500000);
+  } else {
+    nominal = _hargaQurban[_qurbanJenis];
+  }
+  const program = 'Qurban 1445H - ' + _namaQurban[_qurbanJenis];
+  const btn = event.target.closest('button');
+  btn.disabled = true; btn.textContent = 'Memproses...';
+  try {
+    const res = await fetch('/.netlify/functions/create-transaction', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ program, nominal, nama, doa })
+    });
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    tutupModalQurbanSvc();
+    waitSnapAndPay(data.token, {
+      onSuccess: () => { window.location.href = '/payment-success.html?order_id=' + data.order_id; },
+      onPending: () => { alert('Selesaikan pembayaran Anda.'); },
+      onError: () => { alert('Pembayaran gagal. Coba lagi.'); }
+    });
+  } catch(e) { alert('Error: ' + e.message); }
+  finally { btn.disabled = false; btn.textContent = 'Bayar Qurban Sekarang'; }
 }
 </script>
 
@@ -749,3 +885,4 @@ function aktifkanDonasi() {
         }
     </style>
 </body></html>
+
