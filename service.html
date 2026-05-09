@@ -19,14 +19,24 @@ window.addEventListener('DOMContentLoaded', function() {
       s.setAttribute('data-client-key', data.clientKey);
       s.onload = function() { _snapReady = true; };
       document.head.appendChild(s);
+    })
+    .catch(function() {
+      console.warn('Gagal memuat Midtrans client key. Pastikan Netlify Functions berjalan.');
     });
 });
 function waitSnapAndPay(token, callbacks) {
-  if (window.snap && _snapReady) {
-    waitSnapAndPay(token, callbacks);
-  } else {
-    setTimeout(function() { waitSnapAndPay(token, callbacks); }, 300);
+  var waited = 0;
+  function tryPay() {
+    if (window.snap && _snapReady) {
+      window.snap.pay(token, callbacks);
+    } else if (waited < 10000) {
+      waited += 300;
+      setTimeout(tryPay, 300);
+    } else {
+      alert('Gagal memuat sistem pembayaran. Pastikan koneksi internet Anda stabil lalu coba lagi.');
+    }
   }
+  tryPay();
 }
 </script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -518,8 +528,8 @@ function waitSnapAndPay(token, callbacks) {
           <div class="flex items-center gap-3">
             <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">account_balance_wallet</span>
             <div>
-              <p class="text-sm font-semibold text-on-surface">Transfer Bank / QRIS</p>
-              <p class="text-xs text-on-surface-variant">Konfirmasi via WhatsApp</p>
+              <p class="text-sm font-semibold text-on-surface">Transfer Bank / QRIS / E-Wallet</p>
+              <p class="text-xs text-on-surface-variant">Powered by Midtrans</p>
             </div>
           </div>
           <span class="material-symbols-outlined text-primary">check_circle</span>
@@ -529,7 +539,7 @@ function waitSnapAndPay(token, callbacks) {
       <!-- Tombol aktifkan -->
       <button onclick="aktifkanDonasi()" class="w-full bg-primary text-white py-4 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors flex items-center justify-center gap-2">
         <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">favorite</span>
-        <span id="modal-btn-label">Aktifkan Donasi Otomatis</span>
+        <span id="modal-btn-label">Donasi Sekarang</span>
       </button>
     </div>
   </div>
@@ -545,7 +555,7 @@ function bukaModalSedekah() {
   descDonasi = 'Awali hari dengan kebaikan. Donasi rutin setiap hari dipotong otomatis pukul 04:30 WIB.';
   document.getElementById('modal-hari-donasi').textContent = 'Setiap Hari';
   document.getElementById('modal-jadwal-wrap').style.display = 'block';
-  document.getElementById('modal-btn-label').textContent = 'Aktifkan Donasi Otomatis';
+  document.getElementById('modal-btn-label').textContent = 'Donasi Sekarang';
   bukaModal();
 }
 
@@ -700,7 +710,7 @@ function aktifkanDonasi() {
     alert('Terjadi kesalahan: ' + err.message);
   })
   .finally(() => {
-    btn.textContent = document.getElementById('modal-btn-label')?.dataset?.label || 'Donasi Sekarang';
+    btn.textContent = 'Donasi Sekarang';
     btnEl.disabled = false;
   });
 }
@@ -719,6 +729,11 @@ function aktifkanDonasi() {
       </button>
     </div>
     <div class="px-6 py-5 flex flex-col gap-4 max-h-[80vh] overflow-y-auto">
+      <!-- Info hewan terpilih -->
+      <div class="bg-primary/5 rounded-xl p-3 flex items-center gap-3">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">pets</span>
+        <p class="text-sm font-semibold text-on-surface" id="qurban-svc-info-hewan"></p>
+      </div>
       <!-- Pilihan sapi patungan / penuh -->
       <div id="qurban-svc-opsi-sapi" class="hidden">
         <p class="text-sm font-bold text-on-surface mb-3">Pilih Jenis Pembayaran Sapi</p>
@@ -776,18 +791,38 @@ function aktifkanDonasi() {
 </div>
 
 <script>
-let _qurbanJenis = 'kambing';
+let _qurbanJenis = null;
 const _hargaQurban = { kambing: 3250000, sapi_patungan: 3500000, sapi_penuh: 24500000 };
 const _namaQurban = { kambing: 'Kambing Super', sapi_patungan: 'Sapi Patungan (1/7)', sapi_penuh: 'Sapi 1 Ekor' };
+const _infoQurban = {
+  kambing: '🐐 Kambing Super • 25-30 kg • Gratis Penyaluran',
+  sapi_patungan: '🐄 Sapi Bali Tipe A • 250-300 kg',
+};
 
 function bukaModalQurbanService(jenis) {
   _qurbanJenis = jenis;
-  document.getElementById('modal-qurban-svc').style.display = 'flex';
-  document.body.style.overflow = 'hidden';
   const isSapi = jenis === 'sapi_patungan';
+
+  // Reset pilihan sapi ke default (patungan)
+  if (isSapi) {
+    const sapiRadios = document.querySelectorAll('input[name="sapi_opsi"]');
+    sapiRadios.forEach(r => { r.checked = r.value === '3500000'; });
+  }
+
   document.getElementById('qurban-svc-opsi-sapi').classList.toggle('hidden', !isSapi);
   document.getElementById('qurban-svc-judul').textContent = isSapi ? 'Qurban Sapi' : 'Qurban Kambing';
+
+  // Tampilkan info hewan yang dipilih
+  const infoEl = document.getElementById('qurban-svc-info-hewan');
+  if (infoEl) infoEl.textContent = _infoQurban[jenis] || '';
+
+  // Reset form
+  document.getElementById('qurban-svc-nama').value = '';
+  document.getElementById('qurban-svc-doa').value = '';
+
   updateTotalQurbanSvc();
+  document.getElementById('modal-qurban-svc').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 function tutupModalQurbanSvc() {
   document.getElementById('modal-qurban-svc').style.display = 'none';

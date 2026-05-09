@@ -694,8 +694,8 @@ function waitSnapAndPay(token, callbacks) {
           </label>
           <!-- Kambing -->
           <label class="cursor-pointer">
-            <input type="radio" name="jenis_qurban" value="kambing" class="sr-only peer" checked onchange="updateHargaQurban()"/>
-            <div class="border-2 border-primary bg-primary/5 rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors">
+            <input type="radio" name="jenis_qurban" value="kambing" class="sr-only peer" onchange="updateHargaQurban()"/>
+            <div class="border-2 border-outline-variant rounded-xl p-4 peer-checked:border-primary peer-checked:bg-primary/5 transition-colors">
               <p class="font-bold text-on-surface text-sm">🐑 Kambing Super</p>
               <p class="text-primary font-bold text-lg mt-1">Rp 3.250.000</p>
               <p class="text-xs text-on-surface-variant mt-1">25-30 kg • Gratis Penyaluran</p>
@@ -753,20 +753,29 @@ const hargaQurban = { kambing: 3250000, sapi_patungan: 3500000, sapi_penuh: 2450
 const namaQurban = { kambing: 'Kambing Super', sapi_patungan: 'Sapi Patungan (1/7)', sapi_penuh: 'Sapi 1 Ekor' };
 
 function bukaModalQurban() {
+  // Reset semua pilihan
+  document.querySelectorAll('input[name="jenis_qurban"]').forEach(r => r.checked = false);
+  document.getElementById('qurban-total').textContent = 'Rp 0';
+  document.getElementById('qurban-nama').value = '';
+  document.getElementById('qurban-doa').value = '';
   document.getElementById('modal-qurban').style.display = 'flex';
   document.body.style.overflow = 'hidden';
-  updateHargaQurban();
 }
 function tutupModalQurban() {
   document.getElementById('modal-qurban').style.display = 'none';
   document.body.style.overflow = '';
 }
 function updateHargaQurban() {
-  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value || 'kambing';
+  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value;
+  if (!jenis) {
+    document.getElementById('qurban-total').textContent = 'Rp 0';
+    return;
+  }
   document.getElementById('qurban-total').textContent = 'Rp ' + hargaQurban[jenis].toLocaleString('id-ID');
 }
 async function bayarQurban() {
-  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value || 'kambing';
+  const jenis = document.querySelector('input[name="jenis_qurban"]:checked')?.value;
+  if (!jenis) { alert('Pilih jenis hewan qurban terlebih dahulu.'); return; }
   const nama = document.getElementById('qurban-nama').value.trim();
   const doa = document.getElementById('qurban-doa').value;
   if (!nama) { alert('Masukkan nama Shohibul Qurban'); return; }
