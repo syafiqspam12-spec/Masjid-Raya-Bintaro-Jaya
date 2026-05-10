@@ -25,15 +25,21 @@
 <body class="bg-surface min-h-screen flex items-center justify-center px-4 py-10">
 
 <div class="w-full max-w-md">
+  <!-- Loading -->
+  <div id="auth-loading" class="flex flex-col items-center gap-3 py-12 text-on-surface-variant">
+    <span class="material-symbols-outlined text-4xl animate-spin">progress_activity</span>
+    <p class="text-sm">Menghubungkan ke server...</p>
+  </div>
+
   <!-- Logo & Brand -->
-  <div class="flex flex-col items-center mb-8">
+  <div id="auth-brand" class="hidden flex-col items-center mb-8">
     <img src="logomasjid.jpg" alt="Logo" class="h-16 w-16 object-contain rounded-full border border-gray-200 mb-3 shadow-sm"/>
     <h1 class="text-xl font-bold text-primary">Masjid Raya Bintaro Jaya</h1>
     <p class="text-sm text-on-surface-variant mt-1">Komunitas Digital Masjid</p>
   </div>
 
   <!-- Card -->
-  <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+  <div id="auth-card" class="hidden bg-white rounded-2xl shadow-xl overflow-hidden">
     <!-- Tab -->
     <div class="flex border-b border-gray-100">
       <button id="tab-login" onclick="switchTab('login')"
@@ -129,40 +135,47 @@
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// Ambil config dari Netlify function
-const configRes = await fetch('/.netlify/functions/get-client-key').catch(() => null);
-const config = configRes ? await configRes.json().catch(() => ({})) : {};
-
-// Supabase config — diambil dari meta tag yang di-inject saat build
-// Fallback: baca dari window jika ada
-const SUPABASE_URL = window._SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = window._SUPABASE_ANON_KEY || '';
-
 let supabase = null;
 
 async function initSupabase() {
-  // Ambil dari function khusus
-  const res = await fetch('/.netlify/functions/get-supabase-config').catch(() => null);
-  if (res && res.ok) {
-    const data = await res.json().catch(() => null);
-    if (data?.url && data?.anonKey) {
-      supabase = createClient(data.url, data.anonKey);
-      return true;
-    }
+  try {
+    const res = await fetch('/.netlify/functions/get-supabase-config');
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if (!data?.url || !data?.anonKey) throw new Error('Config kosong');
+    supabase = createClient(data.url, data.anonKey);
+    return true;
+  } catch(e) {
+    console.error('initSupabase error:', e);
+    return false;
   }
-  return false;
 }
 
-const ready = await initSupabase();
-if (!ready) {
-  document.body.innerHTML = '<div class="min-h-screen flex items-center justify-center text-center px-4"><p class="text-error font-semibold">Gagal terhubung ke server. Coba refresh halaman.</p></div>';
-}
+async function main() {
+  const ok = await initSupabase();
+  if (!ok) {
+    document.getElementById('auth-loading').innerHTML = `
+      <p class="text-error font-semibold">Gagal terhubung ke server.</p>
+      <p class="text-sm text-on-surface-variant mt-1">Pastikan Anda membuka dari URL Netlify.</p>
+      <a href="home.html" class="text-primary text-sm mt-3 inline-block hover:underline">← Kembali ke Beranda</a>`;
+    return;
+  }
 
-// Cek jika sudah login, redirect
-const { data: { session } } = await supabase.auth.getSession();
-if (session) {
-  const redirect = new URLSearchParams(window.location.search).get('redirect') || 'home.html';
-  window.location.href = redirect;
+  // Cek jika sudah login, redirect
+  try {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      const redirect = new URLSearchParams(window.location.search).get('redirect') || 'home.html';
+      window.location.href = redirect;
+      return;
+    }
+  } catch(e) { console.error('getSession error:', e); }
+
+  // Tampilkan form
+  document.getElementById('auth-loading').classList.add('hidden');
+  document.getElementById('auth-brand').classList.remove('hidden');
+  document.getElementById('auth-brand').classList.add('flex');
+  document.getElementById('auth-card').classList.remove('hidden');
 }
 
 window.switchTab = function(tab) {
@@ -181,73 +194,80 @@ window.togglePass = function(inputId, iconId) {
   const input = document.getElementById(inputId);
   const icon = document.getElementById(iconId);
   if (input.type === 'password') {
-    input.type = 'text';
-    icon.textContent = 'visibility_off';
+    input.type = 'text'; icon.textContent = 'visibility_off';
   } else {
-    input.type = 'password';
-    icon.textContent = 'visibility';
+    input.type = 'password'; icon.textContent = 'visibility';
   }
 };
 
 // Password strength
-document.getElementById('reg-password').addEventListener('input', function() {
-  const val = this.value;
-  let score = 0;
-  if (val.length >= 8) score++;
-  if (/[A-Z]/.test(val)) score++;
-  if (/[0-9]/.test(val)) score++;
-  if (/[^A-Za-z0-9]/.test(val)) score++;
-  const colors = ['bg-red-400','bg-orange-400','bg-yellow-400','bg-emerald-500'];
-  const labels = ['','Lemah','Sedang','Kuat','Sangat Kuat'];
-  for (let i = 1; i <= 4; i++) {
-    const el = document.getElementById('str-' + i);
-    el.className = 'h-1 flex-1 rounded-full ' + (i <= score ? colors[score-1] : 'bg-gray-200');
-  }
-  document.getElementById('str-label').textContent = labels[score] || '';
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('reg-password')?.addEventListener('input', function() {
+    const val = this.value;
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    const colors = ['bg-red-400','bg-orange-400','bg-yellow-400','bg-emerald-500'];
+    const labels = ['','Lemah','Sedang','Kuat','Sangat Kuat'];
+    for (let i = 1; i <= 4; i++) {
+      const el = document.getElementById('str-' + i);
+      if (el) el.className = 'h-1 flex-1 rounded-full ' + (i <= score ? colors[score-1] : 'bg-gray-200');
+    }
+    const lbl = document.getElementById('str-label');
+    if (lbl) lbl.textContent = labels[score] || '';
+  });
+
+  document.getElementById('login-password')?.addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  document.getElementById('reg-password')?.addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
 });
 
 window.doLogin = async function() {
+  if (!supabase) { alert('Koneksi server belum siap. Coba refresh.'); return; }
   const email = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
   const errEl = document.getElementById('login-error');
-  const btn = document.getElementById('login-btn-label');
+  const btn = document.querySelector('#form-login button[onclick="doLogin()"]');
+  const btnLabel = document.getElementById('login-btn-label');
   errEl.classList.add('hidden');
 
   if (!email || !password) { errEl.textContent = 'Email dan password wajib diisi.'; errEl.classList.remove('hidden'); return; }
 
-  btn.textContent = 'Memproses...';
-  document.querySelector('#form-login button[onclick="doLogin()"]').disabled = true;
+  btnLabel.textContent = 'Memproses...';
+  btn.disabled = true;
 
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
     errEl.textContent = error.message.includes('Invalid') ? 'Email atau password salah.' : error.message;
     errEl.classList.remove('hidden');
-    btn.textContent = 'Masuk';
-    document.querySelector('#form-login button[onclick="doLogin()"]').disabled = false;
+    btnLabel.textContent = 'Masuk';
+    btn.disabled = false;
   } else {
-    btn.textContent = 'Berhasil!';
+    btnLabel.textContent = 'Berhasil!';
     const redirect = new URLSearchParams(window.location.search).get('redirect') || 'home.html';
     window.location.href = redirect;
   }
 };
 
 window.doRegister = async function() {
+  if (!supabase) { alert('Koneksi server belum siap. Coba refresh.'); return; }
   const nama = document.getElementById('reg-nama').value.trim();
   const email = document.getElementById('reg-email').value.trim();
   const password = document.getElementById('reg-password').value;
   const errEl = document.getElementById('reg-error');
   const sucEl = document.getElementById('reg-success');
-  const btn = document.getElementById('reg-btn-label');
-  errEl.classList.add('hidden');
-  sucEl.classList.add('hidden');
+  const btn = document.querySelector('#form-register button[onclick="doRegister()"]');
+  const btnLabel = document.getElementById('reg-btn-label');
+  errEl.classList.add('hidden'); sucEl.classList.add('hidden');
 
   if (!nama) { errEl.textContent = 'Nama lengkap wajib diisi.'; errEl.classList.remove('hidden'); return; }
   if (!email) { errEl.textContent = 'Email wajib diisi.'; errEl.classList.remove('hidden'); return; }
   if (password.length < 8) { errEl.textContent = 'Password minimal 8 karakter.'; errEl.classList.remove('hidden'); return; }
 
-  btn.textContent = 'Memproses...';
-  document.querySelector('#form-register button[onclick="doRegister()"]').disabled = true;
+  btnLabel.textContent = 'Memproses...';
+  btn.disabled = true;
 
   const { data, error } = await supabase.auth.signUp({
     email, password,
@@ -257,26 +277,22 @@ window.doRegister = async function() {
   if (error) {
     errEl.textContent = error.message.includes('already') ? 'Email sudah terdaftar. Silakan masuk.' : error.message;
     errEl.classList.remove('hidden');
-    btn.textContent = 'Buat Akun';
-    document.querySelector('#form-register button[onclick="doRegister()"]').disabled = false;
+    btnLabel.textContent = 'Buat Akun';
+    btn.disabled = false;
   } else if (data.session) {
-    // Auto-login berhasil
-    btn.textContent = 'Berhasil!';
+    btnLabel.textContent = 'Berhasil!';
     const redirect = new URLSearchParams(window.location.search).get('redirect') || 'home.html';
     window.location.href = redirect;
   } else {
-    // Perlu konfirmasi email
     sucEl.textContent = '✅ Akun berhasil dibuat! Cek email Anda untuk konfirmasi, lalu masuk.';
     sucEl.classList.remove('hidden');
-    btn.textContent = 'Buat Akun';
-    document.querySelector('#form-register button[onclick="doRegister()"]').disabled = false;
+    btnLabel.textContent = 'Buat Akun';
+    btn.disabled = false;
     setTimeout(() => switchTab('login'), 3000);
   }
 };
 
-// Enter key support
-document.getElementById('login-password').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
-document.getElementById('reg-password').addEventListener('keydown', e => { if(e.key==='Enter') doRegister(); });
+main();
 </script>
 </body>
 </html>
