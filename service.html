@@ -680,21 +680,15 @@ function aktifkanDonasi() {
     doa: doa,
   };
 
-  // DEBUG: tampilkan payload
-  console.log('[DEBUG] Payload:', JSON.stringify(payload));
-  console.log('[DEBUG] _snapReady:', _snapReady, '| window.snap:', !!window.snap);
-
   fetch('/.netlify/functions/create-transaction', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
   .then(r => {
-    console.log('[DEBUG] HTTP status:', r.status);
     return r.json();
   })
   .then(data => {
-    console.log('[DEBUG] Response:', JSON.stringify(data));
     if (data.error) throw new Error(data.error);
     btn.textContent = 'Donasi Sekarang';
     btnEl.disabled = false;
@@ -713,7 +707,6 @@ function aktifkanDonasi() {
     });
   })
   .catch(err => {
-    console.error('[DEBUG] Error:', err);
     btn.textContent = 'Donasi Sekarang';
     btnEl.disabled = false;
     alert('Terjadi kesalahan: ' + err.message);
