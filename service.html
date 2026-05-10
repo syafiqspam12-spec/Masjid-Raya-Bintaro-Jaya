@@ -154,7 +154,7 @@ function waitSnapAndPay(token, callbacks) {
 <li><a class="text-slate-600 dark:text-slate-400 hover:text-emerald-800 dark:hover:text-emerald-200 transition-colors font-title-sm text-on-surface-variant hover:text-primary py-2" href="contack.html">Kontak</a></li>
 </ul>
 <!-- Trailing Action -->
-<div class="flex items-center gap-4">
+<div class="flex items-center gap-3">
 <button class="md:hidden text-on-surface p-2">
 <span class="material-symbols-outlined" data-icon="menu">menu</span>
 </button>
@@ -162,6 +162,7 @@ function waitSnapAndPay(token, callbacks) {
 <span>Zakat Now</span>
 <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
 </a>
+<div id="auth-nav-slot" class="inline-flex"></div>
 </div>
 </div>
 </nav>
@@ -917,5 +918,6 @@ async function bayarQurbanSvc() {
             scrollbar-width: none;  /* Firefox */
         }
     </style>
+<script type="module" src="auth.js"></script>
 </body></html>
 
