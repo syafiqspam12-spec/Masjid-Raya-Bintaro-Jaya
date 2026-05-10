@@ -663,7 +663,6 @@ function aktifkanDonasi() {
     alert('Masukkan jumlah yang valid');
     return;
   }
-  const jam = document.getElementById('modal-jam-donasi')?.value || '';
   const doa = document.getElementById('modal-doa').value;
   const btn = document.getElementById('modal-btn-label');
   const btnEl = btn.closest('button');
@@ -676,42 +675,48 @@ function aktifkanDonasi() {
     program: judulDonasi,
     nominal: nominalTerpilih,
     porsi: window._modePorsi ? window._porsiTerpilih : null,
-    nama: '',
+    nama: 'Hamba Allah',
     email: '',
     doa: doa,
   };
+
+  // DEBUG: tampilkan payload
+  console.log('[DEBUG] Payload:', JSON.stringify(payload));
+  console.log('[DEBUG] _snapReady:', _snapReady, '| window.snap:', !!window.snap);
 
   fetch('/.netlify/functions/create-transaction', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-  .then(r => r.json())
+  .then(r => {
+    console.log('[DEBUG] HTTP status:', r.status);
+    return r.json();
+  })
   .then(data => {
+    console.log('[DEBUG] Response:', JSON.stringify(data));
     if (data.error) throw new Error(data.error);
+    btn.textContent = 'Donasi Sekarang';
+    btnEl.disabled = false;
     tutupModalDonasi();
-    // Buka Midtrans Snap popup
     waitSnapAndPay(data.token, {
-      onSuccess: (result) => {
-        window.location.href = `/payment-success.html?order_id=${data.order_id}`;
+      onSuccess: () => {
+        window.location.href = '/payment-success.html?order_id=' + data.order_id;
       },
-      onPending: (result) => {
+      onPending: () => {
         alert('Pembayaran pending. Selesaikan pembayaran Anda.');
       },
-      onError: (result) => {
+      onError: () => {
         alert('Pembayaran gagal. Silakan coba lagi.');
       },
-      onClose: () => {
-        // User tutup popup tanpa bayar
-      }
+      onClose: () => {}
     });
   })
   .catch(err => {
-    alert('Terjadi kesalahan: ' + err.message);
-  })
-  .finally(() => {
+    console.error('[DEBUG] Error:', err);
     btn.textContent = 'Donasi Sekarang';
     btnEl.disabled = false;
+    alert('Terjadi kesalahan: ' + err.message);
   });
 }
 </script>

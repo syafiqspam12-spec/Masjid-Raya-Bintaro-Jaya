@@ -51,6 +51,7 @@ exports.handler = async (event) => {
     if (dbError) throw dbError;
 
     // Buat transaksi Midtrans
+    const itemName = program.substring(0, 50); // Midtrans max 50 chars
     const parameter = {
       transaction_details: {
         order_id: orderId,
@@ -58,14 +59,14 @@ exports.handler = async (event) => {
       },
       item_details: [
         {
-          id: program.toLowerCase().replace(/\s/g, '-'),
+          id: program.toLowerCase().replace(/\s/g, '-').substring(0, 50),
           price: nominal,
           quantity: 1,
-          name: program,
+          name: itemName,
         },
       ],
       customer_details: {
-        first_name: nama || 'Hamba Allah',
+        first_name: (nama || 'Hamba Allah').substring(0, 255),
         email: email || 'donatur@mrbj.id',
       },
       callbacks: {
@@ -85,10 +86,11 @@ exports.handler = async (event) => {
       }),
     };
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error create-transaction:', err?.message || err);
+    console.error('Error detail:', JSON.stringify(err?.ApiResponse || err, null, 2));
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Terjadi kesalahan server' }),
+      body: JSON.stringify({ error: err?.ApiResponse?.error_messages?.[0] || err?.message || 'Terjadi kesalahan server' }),
     };
   }
 };
