@@ -353,22 +353,34 @@ tailwind.config = {
 
       document.title = `${nama} - Masjid Raya Bintaro Jaya`;
 
-      // Simpan surah terakhir dibuka (ayat diupdate saat bookmark)
-      localStorage.setItem('last_surah', currentSurah);
-      localStorage.setItem('last_surah_name', nama);
-      // Jika belum ada bookmark di surah ini, reset ke ayat 1
-      const existingBm = Object.keys(localStorage).find(k => k.startsWith(`bookmark_${currentSurah}_`));
-      if (!existingBm) localStorage.setItem('last_ayat', 1);
-
       // Render ayat
       const container = document.getElementById('ayat-container');
       let currentAudio = null;
       let currentBtn = null;
 
+      // Muat bookmark dari Supabase (jika login) atau localStorage (fallback)
+      let _bookmarkedAyat = new Set();
+      await loadBookmarksForSurah();
+
+      async function loadBookmarksForSurah() {
+        const sb = window._supabase;
+        const user = window._authUser;
+        if (sb && user) {
+          const { data } = await sb.from('bookmarks').select('ayat').eq('user_id', user.id).eq('surah', currentSurah);
+          _bookmarkedAyat = new Set((data || []).map(b => b.ayat));
+        } else {
+          // Fallback localStorage
+          _bookmarkedAyat = new Set(
+            Object.keys(localStorage)
+              .filter(k => k.startsWith(`bookmark_${currentSurah}_`) && localStorage.getItem(k) === '1')
+              .map(k => parseInt(k.split('_')[2]))
+          );
+        }
+      }
+
       data.ayat.forEach((ayah) => {
-        const bookmarkKey = `bookmark_${currentSurah}_${ayah.nomorAyat}`;
-        const isBookmarked = localStorage.getItem(bookmarkKey) === '1';
-        const audioUrl = ayah.audio['05']; // Misyari Rasyid Al-Afasi
+        const isBookmarked = _bookmarkedAyat.has(ayah.nomorAyat);
+        const audioUrl = ayah.audio['05'];
 
         const card = document.createElement('div');
         card.className = 'bg-surface-container-lowest border border-outline-variant rounded-2xl p-6 hover:border-primary transition-colors';
@@ -382,7 +394,7 @@ tailwind.config = {
                 <svg class="icon-pause hidden" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
                 <span>Putar</span>
               </button>
-              <button class="btn-bookmark flex items-center gap-1 p-1.5 rounded-lg hover:bg-surface-container transition-colors text-xs font-semibold text-on-surface-variant" data-key="${bookmarkKey}" title="${isBookmarked ? 'Hapus tanda' : 'Tandai ayat ini'}">
+              <button class="btn-bookmark flex items-center gap-1 p-1.5 rounded-lg hover:bg-surface-container transition-colors text-xs font-semibold text-on-surface-variant" title="${isBookmarked ? 'Hapus tanda' : 'Tandai ayat ini'}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="${isBookmarked ? '#00342b' : 'none'}" stroke="#00342b" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
                 <span class="bm-label">${isBookmarked ? 'Ditandai' : 'Tandai'}</span>
               </button>
@@ -400,12 +412,9 @@ tailwind.config = {
           btnPlay.querySelector('.icon-pause').classList.add('hidden');
           btnPlay.querySelector('span').textContent = 'Putar';
         };
-
         btnPlay.addEventListener('click', function() {
-          // Stop audio lain yang sedang main
           if (currentAudio && currentAudio !== audio) {
-            currentAudio.pause();
-            currentAudio.currentTime = 0;
+            currentAudio.pause(); currentAudio.currentTime = 0;
             currentBtn.querySelector('.icon-play').classList.remove('hidden');
             currentBtn.querySelector('.icon-pause').classList.add('hidden');
             currentBtn.querySelector('span').textContent = 'Putar';
@@ -415,8 +424,7 @@ tailwind.config = {
             this.querySelector('.icon-play').classList.add('hidden');
             this.querySelector('.icon-pause').classList.remove('hidden');
             this.querySelector('span').textContent = 'Jeda';
-            currentAudio = audio;
-            currentBtn = this;
+            currentAudio = audio; currentBtn = this;
           } else {
             audio.pause();
             this.querySelector('.icon-play').classList.remove('hidden');
@@ -426,52 +434,55 @@ tailwind.config = {
         });
 
         // Bookmark
-        card.querySelector('.btn-bookmark').addEventListener('click', function() {
-          const key = this.dataset.key;
+        card.querySelector('.btn-bookmark').addEventListener('click', async function() {
+          const sb = window._supabase;
+          const user = window._authUser;
           const svg = this.querySelector('svg');
           const label = this.querySelector('.bm-label');
-          if (localStorage.getItem(key) === '1') {
-            if (confirm(`Hapus tanda pada Ayat ${ayah.nomorAyat}?`)) {
-              localStorage.removeItem(key);
-              // Hapus dari slots
-              const slots = getBookmarkSlots();
-              const newSlots = slots.filter(s => !(s.surah == currentSurah && s.ayat == ayah.nomorAyat));
-              saveBookmarkSlots(newSlots);
-              svg.setAttribute('fill', 'none');
-              if (label) label.textContent = 'Tandai';
-              this.title = 'Tandai ayat ini';
-            }
-          } else {
-            const slots = getBookmarkSlots();
-            const existIdx = slots.findIndex(s => s.surah == currentSurah);
+          const sudahDitandai = _bookmarkedAyat.has(ayah.nomorAyat);
 
-            // Kalau surah ini belum ada di slot dan sudah penuh 3 — blokir
-            if (existIdx < 0 && slots.length >= 3) {
-              alert('Tanda baca sudah penuh (maks. 3). Hapus salah satu tanda terlebih dahulu.');
+          if (sudahDitandai) {
+            // Hapus bookmark
+            if (!confirm(`Hapus tanda pada Ayat ${ayah.nomorAyat}?`)) return;
+            if (sb && user) {
+              await sb.from('bookmarks').delete().eq('user_id', user.id).eq('surah', currentSurah).eq('ayat', ayah.nomorAyat);
+            } else {
+              localStorage.removeItem(`bookmark_${currentSurah}_${ayah.nomorAyat}`);
+              const slots = getBookmarkSlots();
+              saveBookmarkSlots(slots.filter(s => !(s.surah == currentSurah && s.ayat == ayah.nomorAyat)));
+            }
+            _bookmarkedAyat.delete(ayah.nomorAyat);
+            svg.setAttribute('fill', 'none');
+            if (label) label.textContent = 'Tandai';
+            this.title = 'Tandai ayat ini';
+          } else {
+            // Tambah bookmark — cek login dulu
+            if (!sb || !user) {
+              const konfirm = confirm('Login untuk menyimpan tanda baca ke akun Anda.\n\nMau masuk sekarang?');
+              if (konfirm) window.location.href = `auth.html?redirect=${encodeURIComponent(window.location.pathname + window.location.search)}`;
               return;
             }
+            // Upsert — 1 bookmark per surah
+            await sb.from('bookmarks').upsert({
+              user_id: user.id,
+              surah: currentSurah,
+              ayat: ayah.nomorAyat,
+              nama_surah: surahList[currentSurah][0],
+            }, { onConflict: 'user_id,surah' });
 
-            if (existIdx >= 0) {
-              // Surah sudah ada — update ayat di slot yang sama
-              const oldKey = `bookmark_${currentSurah}_${slots[existIdx].ayat}`;
-              localStorage.removeItem(oldKey);
-              const oldCard = document.querySelector(`[data-ayat="${slots[existIdx].ayat}"]`);
-              if (oldCard) {
-                const oldBtn = oldCard.querySelector('.btn-bookmark');
-                if (oldBtn) {
-                  oldBtn.querySelector('svg').setAttribute('fill', 'none');
-                  const ol = oldBtn.querySelector('.bm-label');
+            // Update UI bookmark lama di surah ini
+            _bookmarkedAyat.forEach(oldAyat => {
+              if (oldAyat !== ayah.nomorAyat) {
+                const oldCard = document.querySelector(`[data-ayat="${oldAyat}"]`);
+                if (oldCard) {
+                  oldCard.querySelector('.btn-bookmark svg')?.setAttribute('fill', 'none');
+                  const ol = oldCard.querySelector('.bm-label');
                   if (ol) ol.textContent = 'Tandai';
-                  oldBtn.title = 'Tandai ayat ini';
                 }
               }
-              slots[existIdx] = { surah: currentSurah, nama: surahList[currentSurah][0], ayat: ayah.nomorAyat };
-            } else {
-              slots.push({ surah: currentSurah, nama: surahList[currentSurah][0], ayat: ayah.nomorAyat });
-            }
-            saveBookmarkSlots(slots);
-            localStorage.setItem(key, '1');
-            localStorage.setItem('last_ayat', ayah.nomorAyat);
+            });
+            _bookmarkedAyat.clear();
+            _bookmarkedAyat.add(ayah.nomorAyat);
             svg.setAttribute('fill', '#00342b');
             if (label) label.textContent = 'Ditandai';
             this.title = 'Hapus tanda';
@@ -514,11 +525,10 @@ tailwind.config = {
   }
 
   function updateBookmarkBar() {
-    const keys = Object.keys(localStorage).filter(k => k.startsWith(`bookmark_${currentSurah}_`));
     const bar = document.getElementById('bookmark-bar');
     const txt = document.getElementById('bookmark-text');
-    if (keys.length > 0) {
-      const ayatNums = keys.map(k => k.split('_')[2]).sort((a,b) => a-b).join(', ');
+    if (_bookmarkedAyat && _bookmarkedAyat.size > 0) {
+      const ayatNums = [..._bookmarkedAyat].sort((a,b) => a-b).join(', ');
       txt.textContent = `Ayat yang ditandai: ${ayatNums}`;
       bar.classList.remove('hidden');
     } else {
@@ -526,9 +536,17 @@ tailwind.config = {
     }
   }
 
-  function clearBookmarks() {
-    Object.keys(localStorage).filter(k => k.startsWith(`bookmark_${currentSurah}_`)).forEach(k => localStorage.removeItem(k));
+  async function clearBookmarks() {
+    const sb = window._supabase;
+    const user = window._authUser;
+    if (sb && user) {
+      await sb.from('bookmarks').delete().eq('user_id', user.id).eq('surah', currentSurah);
+    } else {
+      Object.keys(localStorage).filter(k => k.startsWith(`bookmark_${currentSurah}_`)).forEach(k => localStorage.removeItem(k));
+    }
+    _bookmarkedAyat.clear();
     document.querySelectorAll('.btn-bookmark svg').forEach(svg => svg.setAttribute('fill', 'none'));
+    document.querySelectorAll('.bm-label').forEach(l => l.textContent = 'Tandai');
     updateBookmarkBar();
   }
 
@@ -541,7 +559,12 @@ tailwind.config = {
 
   loadSurah();
 </script>
-<script type="module" src="auth.js"></script>
+<script type="module">
+import { initAuth, getUser, getSupabase } from './auth.js';
+const user = await initAuth();
+window._authUser = user;
+window._supabase = getSupabase();
+</script>
 </body>
 </html>
 
