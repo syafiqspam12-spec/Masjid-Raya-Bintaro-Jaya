@@ -546,12 +546,40 @@ function waitSnapAndPay(token, callbacks) {
   </div>
 </div>
 
+<script type="module">
+import { initAuth, getUser, requireLogin } from './auth.js';
+
+// Init auth dulu, baru expose fungsi ke global
+let _authUser = null;
+initAuth().then(user => {
+  _authUser = user;
+  // Isi nama & email di form donasi jika sudah login
+  if (user) {
+    const nama = user.user_metadata?.full_name || '';
+    const email = user.email || '';
+    window._authNama = nama;
+    window._authEmail = email;
+  }
+});
+
+window._requireLoginUntuk = function(aksi) {
+  if (!_authUser) {
+    const konfirm = confirm(`Untuk ${aksi}, Anda perlu masuk terlebih dahulu.\n\nMau masuk sekarang?`);
+    if (konfirm) window.location.href = 'auth.html?redirect=' + encodeURIComponent(window.location.pathname);
+    return false;
+  }
+  return true;
+};
+</script>
+
 <script>
 let nominalTerpilih = 25000;
 let judulDonasi = '';
 let descDonasi = '';
 
 function bukaModalSedekah() {
+  // Sedekah Shubuh wajib login
+  if (!window._requireLoginUntuk('mengaktifkan Sedekah Shubuh')) return;
   judulDonasi = 'Sedekah Shubuh';
   descDonasi = 'Awali hari dengan kebaikan. Donasi rutin setiap hari dipotong otomatis pukul 04:30 WIB.';
   document.getElementById('modal-hari-donasi').textContent = 'Setiap Hari';
@@ -581,20 +609,15 @@ function bukaModalPorsi(judul, desc, hargaPerPorsi, hari) {
   document.getElementById('modal-btn-label').textContent = 'Donasi Sekarang';
   document.getElementById('modal-input-label').textContent = 'Pilih Jumlah Porsi';
 
-  // Tampilkan info harga, sembunyikan tombol nominal
   document.getElementById('modal-nominal-cepat').innerHTML = `
     <div class="col-span-3 text-xs text-on-surface-variant">
       Harga per porsi: <span class="font-bold text-primary">Rp ${hargaPerPorsi.toLocaleString('id-ID')}</span>
     </div>`;
 
-  // Tampilkan input porsi, sembunyikan input nominal
   document.getElementById('input-nominal-wrap').classList.add('hidden');
   document.getElementById('input-porsi-wrap').classList.remove('hidden');
-
-  // Reset ke 1 porsi
   document.getElementById('modal-porsi-input').value = 1;
   setPorsiDariInput(1);
-
   document.getElementById('modal-doa').value = '';
   document.getElementById('doa-count').textContent = '0';
   document.getElementById('modal-donasi').style.display = 'flex';
@@ -621,6 +644,7 @@ function pilihPorsi(porsi, harga) {
   document.getElementById('modal-porsi-input').value = porsi;
   setPorsiDariInput(porsi);
 }
+
 function bukaModal() {
   document.getElementById('modal-donasi-judul').textContent = judulDonasi;
   document.getElementById('modal-donasi-desc').textContent = descDonasi;
@@ -636,7 +660,6 @@ function tutupModalDonasi() {
   document.body.style.overflow = '';
   window._modePorsi = false;
   window._porsiTerpilih = 0;
-  // Reset ke mode nominal untuk sedekah shubuh
   document.getElementById('input-nominal-wrap').classList.remove('hidden');
   document.getElementById('input-porsi-wrap').classList.add('hidden');
 }
@@ -668,7 +691,10 @@ function aktifkanDonasi() {
   const btn = document.getElementById('modal-btn-label');
   const btnEl = btn.closest('button');
 
-  // Loading state
+  // Gunakan data user jika sudah login
+  const nama = window._authNama || 'Hamba Allah';
+  const email = window._authEmail || '';
+
   btn.textContent = 'Memproses...';
   btnEl.disabled = true;
 
@@ -676,9 +702,7 @@ function aktifkanDonasi() {
     program: judulDonasi,
     nominal: nominalTerpilih,
     porsi: window._modePorsi ? window._porsiTerpilih : null,
-    nama: 'Hamba Allah',
-    email: '',
-    doa: doa,
+    nama, email, doa,
   };
 
   fetch('/.netlify/functions/create-transaction', {
@@ -686,24 +710,16 @@ function aktifkanDonasi() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-  .then(r => {
-    return r.json();
-  })
+  .then(r => r.json())
   .then(data => {
     if (data.error) throw new Error(data.error);
     btn.textContent = 'Donasi Sekarang';
     btnEl.disabled = false;
     tutupModalDonasi();
     waitSnapAndPay(data.token, {
-      onSuccess: () => {
-        window.location.href = '/payment-success.html?order_id=' + data.order_id;
-      },
-      onPending: () => {
-        alert('Pembayaran pending. Selesaikan pembayaran Anda.');
-      },
-      onError: () => {
-        alert('Pembayaran gagal. Silakan coba lagi.');
-      },
+      onSuccess: () => { window.location.href = '/payment-success.html?order_id=' + data.order_id; },
+      onPending: () => { alert('Pembayaran pending. Selesaikan pembayaran Anda.'); },
+      onError: () => { alert('Pembayaran gagal. Silakan coba lagi.'); },
       onClose: () => {}
     });
   })
@@ -816,7 +832,7 @@ function bukaModalQurbanService(jenis) {
   if (infoEl) infoEl.textContent = _infoQurban[jenis] || '';
 
   // Reset form
-  document.getElementById('qurban-svc-nama').value = '';
+  document.getElementById('qurban-svc-nama').value = window._authNama || '';
   document.getElementById('qurban-svc-doa').value = '';
 
   updateTotalQurbanSvc();
@@ -837,7 +853,9 @@ function updateTotalQurbanSvc() {
   document.getElementById('qurban-svc-total').textContent = 'Rp ' + nominal.toLocaleString('id-ID');
 }
 async function bayarQurbanSvc() {
-  const nama = document.getElementById('qurban-svc-nama').value.trim();
+  // Qurban wajib login
+  if (!window._requireLoginUntuk('mendaftar Qurban')) return;
+  const nama = document.getElementById('qurban-svc-nama').value.trim() || window._authNama || '';
   const doa = document.getElementById('qurban-svc-doa').value;
   if (!nama) { alert('Masukkan nama Shohibul Qurban'); return; }
   let nominal;
@@ -918,6 +936,5 @@ async function bayarQurbanSvc() {
             scrollbar-width: none;  /* Firefox */
         }
     </style>
-<script type="module" src="auth.js"></script>
 </body></html>
 
